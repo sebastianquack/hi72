@@ -1,0 +1,3 @@
+== README
+
+Website for 72 Hour Interactions project coming up in the Ruhr Valley in 2014.
