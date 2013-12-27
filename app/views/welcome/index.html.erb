@@ -1,6 +1,14 @@
-<canvas id="canvas" width="640" height="425"></canvas>
-<img class="city-shape" src="/assets/background_1_transparent.png" width="640" height="425" alt="Background 1 Transparent">
-<video id="video" width="640" height="425" autoplay></video>
 
-<button id="snap">Snap photo</button>
-<button id="clear">Clear photo</button>
+<div id="background" class="image-layer"></div>
+<div id="disaster" class="image-layer"></div>
+
+<video id="video" width="640" height="480" class="image-layer flip" autoplay></video>
+<canvas id="canvas" width="640" height="480" class="image-layer flip"></canvas>
+
+<div id="silhouette" class="image-layer flip"></div>
+
+<div id="controls">
+	<button id="snap">Snap photo</button>
+	<button id="clear">Clear photo</button>
+	<button id="mask">Toggle mask</button>
+</div>

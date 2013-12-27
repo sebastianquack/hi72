@@ -54,11 +54,25 @@ $(document).ready(function() {
 		
 	// Trigger photo take
 	$('#snap').click(function() {
-		context.drawImage(video, 0, 0, 640, 425);
+		context.drawImage(video, 0, 0, 640, 480);
 	});
 	
 	$('#clear').click(function() {
     	context.clearRect(0, 0, canvas.width, canvas.height);
+	});
+	
+	$('#mask').click(function() {
+		$('#video').toggleClass('mask');
+		$('#canvas').toggleClass('mask');
+		if($('#video').hasClass('mask')) {
+			$('#video').css('z-index', '3');
+			$('#canvas').css('z-index', '4');
+			$('#silhouette').show();
+		} else {
+			$('#video').css('z-index', '-1');
+			$('#canvas').css('z-index', '0');
+			$('#silhouette').hide();
+		}
 	});
 	
 });
