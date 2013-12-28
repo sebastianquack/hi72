@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require headtrackr.js
 //= require_tree .
 
 // Converts canvas to an image
@@ -22,17 +23,25 @@ function convertCanvasToImage(canvas) {
 	return image;
 }
 
+face_tracking_on = true;
+
 // Put event listeners into place
 $(document).ready(function() {
 	// Grab elements, create settings, etc.
-	var canvas = document.getElementById("canvas"),
-		context = canvas.getContext("2d"),
-		video = document.getElementById("video"),
+		var video = document.getElementById("video"),
 		videoObj = { "video": true },
+		htracker = new headtrackr.Tracker(),
+		trackingCanvas = document.getElementById("tracking-canvas"),
+		photoCanvas = document.getElementById("photo-canvas"),
+		photoContext = photoCanvas.getContext("2d"),
 		errBack = function(error) {
 			console.log("Video capture error: ", error.code); 
 		};
 
+	htracker.init(video, trackingCanvas);
+	htracker.start();
+
+	/*
 	// Put video listeners into place
 	if(navigator.getUserMedia) { // Standard
 		navigator.getUserMedia(videoObj, function(stream) {
@@ -50,28 +59,48 @@ $(document).ready(function() {
 			video.src = window.URL.createObjectURL(stream);
 			video.play();
 		}, errBack);
-	}
+	}*/
 		
+	document.addEventListener('facetrackingEvent', 
+	  function (event) {
+	    //console.log('x: ' + event.x);
+		if(face_tracking_on) {
+			$('#silhouette').css('left', (190 - event.x) + 'px');
+			$('#video').css('-webkit-mask-position', (event.x - 190) + 'px 0px');
+			$('#tracking-canvas').css('-webkit-mask-position', (event.x - 190) + 'px 0px');
+			$('#photo-canvas').css('-webkit-mask-position', (event.x - 190) + 'px 0px');
+		}
+	  }
+	);
+			
 	// Trigger photo take
 	$('#snap').click(function() {
-		context.drawImage(video, 0, 0, 640, 480);
+		photoContext.drawImage(video, 0, 0, 640, 480);
+		face_tracking_on = false;			
 	});
 	
 	$('#clear').click(function() {
-    	context.clearRect(0, 0, canvas.width, canvas.height);
+    	photoContext.clearRect(0, 0, photoCanvas.width, photoCanvas.height);
+		face_tracking_on = true;			
 	});
 	
 	$('#mask').click(function() {
 		$('#video').toggleClass('mask');
-		$('#canvas').toggleClass('mask');
+		$('#photo-canvas').toggleClass('mask');
 		if($('#video').hasClass('mask')) {
-			$('#video').css('z-index', '3');
-			$('#canvas').css('z-index', '4');
+			$('#background').css('z-index', '0');
 			$('#silhouette').show();
 		} else {
-			$('#video').css('z-index', '-1');
-			$('#canvas').css('z-index', '0');
+			$('#background').css('z-index', '5');
 			$('#silhouette').hide();
+		}
+	});
+	
+	$('#tracking').click(function() {
+		if(face_tracking_on) {
+			face_tracking_on = false;			
+		} else {
+			face_tracking_on = true;
 		}
 	});
 	
