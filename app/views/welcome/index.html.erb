@@ -1,15 +1,40 @@
 
 <div id="background" class="image-layer"></div>
+<div id="disaster" class="image-layer"></div>
 
-<video id="video" width="640" height="480" class="image-layer flip mask" autoplay></video>
-<canvas id="tracking-canvas" width="640" height="480" class="image-layer flip mask"></canvas>
-<canvas id="photo-canvas" width="640" height="480" class="image-layer flip mask"></canvas>
+<video id="video" width="640" height="480" class="image-layer flip" autoplay></video>
+<canvas id="tracking-canvas" width="640" height="480" class="image-layer flip"></canvas>
+
+<canvas id="photo-canvas" width="640" height="480" class="image-layer"></canvas>
 
 <div id="silhouette" class="image-layer flip"></div>
 
+<div id="titles" class="image-layer">
+	<input id="title" class="poster-title" value="Title">
+	<input id="subtitle" class="poster-title" value="Subtitle">
+</div>
+
 <div id="controls">
+	<select id="select-background">
+	  <option value="none">none</option>
+	  <option value="background_1">hagen</option>
+	  <option value="background_2">witten</option>
+	</select>
+
+	<select id="select-disaster">
+	  <option value="none">none</option>
+	  <option value="effect_1">lightning</option>
+	  <option value="effect_2">fire</option>
+	</select>
+
+	<select id="select-silhouette">
+	  <option value="none">none</option>
+	  <option value="transparent">godzilla</option>
+	  <option value="silhouette_1">guy</option>
+	  <option value="silhouette_2">guy sepia</option>
+	</select>
+
 	<button id="snap">Snap photo</button>
 	<button id="clear">Clear photo</button>
-	<button id="mask">Toggle mask</button>
-	<button id="tracking">Toggle face tracking</button>
+
 </div>
