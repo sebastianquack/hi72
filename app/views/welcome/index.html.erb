@@ -1,3 +1,4 @@
+<h1>The Generator</h1>
 <canvas id="canvas" width="640" height="480"></canvas>
  
 <div id="titles" class="image-layer">
@@ -34,3 +35,26 @@
 <button id="snap">Ready</button>
 <button id="clear">Back</button>
 <button id="submit">Save & Share</button>
+
+<h1>The Gallery</h1>
+<div id="poster-gallery">
+
+    <% @posters.each do |poster| %>
+	<div class="poster">
+		<%= image_tag poster.image.url(:medium) %><br>
+		<a href="#" 
+		  onclick="window.open(
+		      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('<%= absolute_attachment_url(poster.image) %>'), 
+		      'facebook-share-dialog', 
+		      'width=626,height=436'); 
+		    return false;">
+		    <img src="/assets/facebook.png"/>
+		</a>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= absolute_attachment_url(poster.image) %>" data-lang="en" data-related="anywhereTheJavascriptAPI" data-count="none">Tweet</a>
+
+	</div>
+	<% end %>
+	
+</div>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

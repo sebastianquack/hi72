@@ -1,0 +1,27 @@
+<h1>Listing posters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posters.each do |poster| %>
+      <tr>
+		<td><%= image_tag poster.image.url(:thumb) %></td>
+        <td><%= link_to 'Show', poster %></td>
+        <td><%= link_to 'Edit', edit_poster_path(poster) %></td>
+        <td><%= link_to 'Destroy', poster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Poster', new_poster_path %>

@@ -12,6 +12,8 @@ test:
   host: localhost
 
 production:
-  adapter: postgresql
-  database: hi72/production
+  adapter: mysql
+  database: usr_web94_1
   host: localhost
+  username: web94
+  password: S15CE4iJ
