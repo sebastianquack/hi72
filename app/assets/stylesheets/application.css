@@ -19,6 +19,7 @@
 
 body {
 	background-color: #333;
+	font-family: sans-serif;
 }
 
 video {
@@ -44,6 +45,10 @@ video {
 	width: 640px;
 }
 
+label {
+	color: #fff;
+}
+
 #title {
 	top: 300px;
 	font-size: 50px;
@@ -53,3 +58,16 @@ video {
 	top: 360px;
 	font-size: 20px;
 }
+
+#clear {
+	display: none;
+}
+
+#submit {
+	display: none;
+} 
+
+
+
+
+

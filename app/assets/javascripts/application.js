@@ -15,6 +15,19 @@
 //= require turbolinks
 //= require_tree .
 
+// Convert dataURL to Blob object
+function dataURLtoBlob(dataURL) {
+   // Decode the dataURL    
+   var binary = atob(dataURL.split(',')[1]);
+   // Create 8-bit unsigned array
+   var array = [];
+   for(var i = 0; i < binary.length; i++) {
+       array.push(binary.charCodeAt(i));
+   }
+   // Return our Blob object
+   return new Blob([new Uint8Array(array)], {type: 'image/png'});
+}
+
 window.addEventListener("DOMContentLoaded", function() {
 
 	var canvas = document.getElementById("canvas");
@@ -73,9 +86,9 @@ window.addEventListener("DOMContentLoaded", function() {
 	var silhouette_images = [];
 	var mask_images = [];
 
-	function create_image(src) {
-		obj = new Image();
-		obj.src = 'assets/' + src;
+	function create_image(path) {
+		var obj = new Image();
+		obj.src = 'assets/' + path;
 		return obj;
 	}
 
@@ -90,8 +103,6 @@ window.addEventListener("DOMContentLoaded", function() {
 
 	silhouette_images[2] = create_image('silhouette_1.png');
 	silhouette_images[3] = create_image('silhouette_2.png');
-
-	var render_video_on = true;
 
 	// calculate and display live video effects
 	function apply_effects() {
@@ -193,13 +204,49 @@ window.addEventListener("DOMContentLoaded", function() {
 		context.fillText($('#subtitle').val(), x, 370);
 
 		$('#titles').hide();
+		$('#selectors').hide();
+		$('#snap').hide();
+		$('#clear').show();
+		$('#submit').show();		
 	});
 	
 	$('#clear').click(function() {
+		$('#clear').hide();
+		$('#submit').hide();
+		$('#selectors').show();		
+		$('#snap').show();
+		
 		video.play();
 		face_tracking_on = true;			
 		apply_effects();
 		$('#titles').show();
 	});
+	
+	
+	$('#submit').click(function() {
+				
+		var dataURL = canvas.toDataURL('image/png');
+				
+	    // Get our file
+	    var file = dataURLtoBlob(dataURL);
+	    // Create new form data
+	    var fd = new FormData();
+	    // Append our Canvas image file to the form data
+	    fd.append("image", file);
+	    // And send it
+	    $.ajax({
+	        url: "/poster_submit",
+	        type: "POST",
+	        data: fd,
+	        processData: false,
+	        contentType: false,
+	     }).done(function(data) {
+			 alert(data);
+		 });	
+
+
+
+	});
+		
 	
 }, false);
