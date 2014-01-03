@@ -13,174 +13,193 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require headtrackr.js
 //= require_tree .
 
-// Converts canvas to an image
-function convertCanvasToImage(canvas) {
-	var image = new Image();
-	image.src = canvas.toDataURL("image/png");
-	return image;
-}
+window.addEventListener("DOMContentLoaded", function() {
 
-function show_video() {
-	$('#silhouette').show();
-	$('#video').show();
-	$('#silhouette').show();	
-}
+	var canvas = document.getElementById("canvas");
+	var	context = canvas.getContext("2d");
 
-function hide_video() {
-	$('#silhouette').hide();
-	$('#video').hide();
-	$('#silhouette').hide();	
-}
+	// setup video
+	var	video = document.createElement("video");
+	video.width = canvas.width;
+	video.height = canvas.height;
 
-face_tracking_on = true;
+	/* this is taken over by headtracking library
+	var videoObj = { "video": true };
+	var errBack = function(error) {
+		console.log("Video capture error: ", error.code); 
+	};
 
-// Put event listeners into place
-$(document).ready(function() {
+	if(navigator.getUserMedia) { // Standard
+		navigator.getUserMedia(videoObj, function(stream) {
+			video.src = stream;
+			video.play();
+		}, errBack);
+	} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+		navigator.webkitGetUserMedia(videoObj, function(stream){
+			video.src = window.webkitURL.createObjectURL(stream);
+			video.play();
+		}, errBack);
+	}
+	else if(navigator.mozGetUserMedia) { // Firefox-prefixed
+		navigator.mozGetUserMedia(videoObj, function(stream){
+			video.src = window.URL.createObjectURL(stream);
+			video.play();
+		}, errBack);
+	}
+	*/
 
-	// Grab elements, create settings, etc.
-	var video = document.getElementById("video"),
-		videoObj = { "video": true },
-		htracker = new headtrackr.Tracker({ui : false}),
-		trackingCanvas = document.getElementById("tracking-canvas"),
-		photoCanvas = document.getElementById("photo-canvas"),
-		errBack = function(error) {
-			console.log("Video capture error: ", error.code); 
-		};
+	// setup video effects
+	var frame_canvas = document.createElement('canvas');
+	frame_canvas.width = canvas.width;
+	frame_canvas.height = canvas.height;
 
-	// setup events
+	var	frame_context = frame_canvas.getContext("2d");
+	// flip video frame context for mirror effect
+	frame_context.translate(video.width, 0);
+	frame_context.scale(-1, 1);	    
 
+	var mask_offset_x = 0;
+	var mask_offset_y = 0;
+
+	var background_id = 0;
+	var disaster_id = 0;
+	var silhouette_id = 0;
+
+	// load layer images
+	var background_images = [];
+	var disaster_images = [];
+	var silhouette_images = [];
+	var mask_images = [];
+
+	function create_image(src) {
+		obj = new Image();
+		obj.src = 'assets/' + src;
+		return obj;
+	}
+
+	background_images[1] = create_image('background_1_transparent.png');
+	background_images[2] = create_image('background_2_transparent.png');
+
+	disaster_images[1] = create_image('effect_1.png');
+	disaster_images[2] = create_image('effect_2.png');
+
+	mask_images[2] = create_image('silhouette_1_mask.png');
+	mask_images[3] = create_image('silhouette_2_mask.png');
+
+	silhouette_images[2] = create_image('silhouette_1.png');
+	silhouette_images[3] = create_image('silhouette_2.png');
+
+	var render_video_on = true;
+
+	// calculate and display live video effects
+	function apply_effects() {
+	    if( video.paused || video.ended ) {
+	        return;
+	    }
+		// copy video frame
+		frame_context.drawImage(video, 0, 0);
+
+		// clear output canvas
+        context.clearRect(0, 0, canvas.width, canvas.height);
+	   	context.globalCompositeOperation = 'source-over';
+
+		if(silhouette_id > 1) {	
+			// prepare masking effect
+			context.drawImage(mask_images[silhouette_id], mask_offset_x, mask_offset_y);
+			context.globalCompositeOperation = 'source-atop';
+		
+			// add video image to canvas
+			context.drawImage(frame_canvas, 0, 0);
+			
+			context.globalCompositeOperation = 'destination-over';
+			context.drawImage(silhouette_images[silhouette_id], mask_offset_x, mask_offset_y);
+		}
+		
+		if(disaster_id > 0) {
+			context.globalCompositeOperation = 'destination-over';
+			context.drawImage(disaster_images[disaster_id], 0, 0);
+		}
+				
+		if(background_id > 0) {
+			context.globalCompositeOperation = 'destination-over';
+			context.drawImage(background_images[background_id], 0, 0);
+		}
+		
+		if(silhouette_id == 1) {	
+			// add video image to canvas under everything as godzilla mode
+			context.globalCompositeOperation = 'destination-over';
+			context.drawImage(frame_canvas, 0, 0);			
+		}
+
+	    // Repeat at 30 fps
+	    setTimeout(apply_effects, 1000/30);
+	}
+	
+	$(video).on('canplaythrough', function(){
+	    apply_effects();
+	});
+	
+	// setup head tracking
+	var htracker = new headtrackr.Tracker({ui : false});
+	var tracking_canvas = document.createElement("canvas");
+	tracking_canvas.width = canvas.width;
+	tracking_canvas.height = canvas.height;
+	
+	htracker.init(video, tracking_canvas);
+	htracker.start();
+	
+	var face_tracking_on = true;
+	
+	// when face moves change offsets of mask and silhouette
+	document.addEventListener('facetrackingEvent', 
+	  function (event) {
+		if(face_tracking_on) {
+			mask_offset_x = video.width - event.x + 120;
+		}
+	  }
+	);
+	
 	// layer selectors
 	$('#select-background').change(function() {
-		if($('#select-background').val() == "none") {
-			$('#background').css('background-image', 'none');
-		} else {
-			image_path = '/assets/'+$('#select-background').val()+'_transparent.png';
-			$('#background').css('background-image', 'url('+image_path+')');
-		}
+		background_id = $('#select-background').val();
 	});
 
 	$('#select-disaster').change(function() {
-		if($('#select-disaster').val() == "none") {
-			$('#disaster').css('background-image', 'none');
-		} else {
-			image_path = '/assets/'+$('#select-disaster').val()+'.png';
-			$('#disaster').css('background-image', 'url('+image_path+')');
-		}
+		disaster_id = $('#select-disaster').val();
 	});
 	
 	$('#select-silhouette').change(function() {
-		
-		if($('#select-silhouette').val() == 'none') {
-
-			hide_video();
-			$('#background').css('z-index', '5');
-			$('#disaster').css('z-index', '6');
-
-		} else if($('#select-silhouette').val() == 'transparent') {
-			
-			show_video();
-			$('#video').removeClass('mask');
-			$('#video').css('-webkit-mask', 'none');
-			$('#photo-canvas').removeClass('mask');
-			$('#photo-canvas').css('-webkit-mask', 'none');
-
-			$('#background').css('z-index', '5');
-			$('#disaster').css('z-index', '6');
-			$('#silhouette').hide();
-						
-		} else {
-				
-			show_video();
-			if(!$('#video').hasClass('mask')) {
-
-				$('#video').addClass('mask');
-				$('#photo-canvas').addClass('mask');
-				
-				$('#background').css('z-index', '0');
-				$('#disaster').css('z-index', '1');
-				$('#silhouette').show();
-			}
-			
-			image_path = '/assets/'+$('#select-silhouette').val()+'.png';
-			$('#silhouette').css('background-image', 'url('+image_path+')');
-
-			mask_path = '/assets/'+$('#select-silhouette').val()+'_mask.png';
-			$('.mask').css('-webkit-mask-image', 'url('+mask_path+')');
-		}
-		
+		silhouette_id = $('#select-silhouette').val();		
 	});
-
-		
-	// Trigger photo take
+	
 	$('#snap').click(function() {
 		face_tracking_on = false;		
 		video.pause();
-		$('.poster-title').css('background-color', 'rgba(0,0,0,0.0)');
 		
-		/*
-		hide_video();
-									
-		var photo_context = $('#photo-canvas')[0].getContext("2d");
+        context.textAlign = 'center';
+        var x = canvas.width / 2;
+        context.textBaseline = 'middle';
 
-		// fill background with black
-		photo_context.rect(0,0,640,480);
-		photo_context.fill();
+		context.globalCompositeOperation = 'source-over';
 
-		// render background on canvas
-		var background = new Image();		
-		background.src = $('#background').css('background-image').replace(/^url|[\(\)]/g, '');
-		// Make sure the image is loaded first otherwise nothing will draw.
-		background.onload = function(){
-		    photo_context.drawImage(background,0,0);   
-		};
-		
-		// render disaster on canvas
-		var disaster = new Image();
-		disaster.src = $('#disaster').css('background-image').replace(/^url|[\(\)]/g, '');
-		// Make sure the image is loaded first otherwise nothing will draw.
-		disaster.onload = function(){
-		    photo_context.drawImage(disaster,0,0);   
-		};
-		
-		// render silhouette on canvas
-		var silhouette = new Image();		
-		silhouette.src = $('#silhouette').css('background-image').replace(/^url|[\(\)]/g, '');
-		// Make sure the image is loaded first otherwise nothing will draw.
-		silhouette.onload = function(){
-		    photo_context.drawImage(silhouette,0,0);   
-		};
+		context.fillStyle = $('#title').css('color');
+		context.font = $('#title').css('font');
+		context.fillText($('#title').val(), x, 325);
 
-		// render video frame on canvas
-		photo_context.drawImage($('#tracking-canvas')[0], 0, 0);
-						
-		// show the canvas		
-		$('#photo-canvas').show();
-		*/
-				
+		context.fillStyle = $('#subtitle').css('color');
+		context.font = $('#subtitle').css('font');
+		context.fillText($('#subtitle').val(), x, 370);
+
+		$('#titles').hide();
 	});
 	
 	$('#clear').click(function() {
 		video.play();
 		face_tracking_on = true;			
-		$('.poster-title').css('background-color', 'rgba(0,0,0,0.1)');
+		apply_effects();
+		$('#titles').show();
 	});
 	
-	// init head tracking
-	htracker.init(video, trackingCanvas);
-	htracker.start();
-	
-	document.addEventListener('facetrackingEvent', 
-	  function (event) {
-	    //console.log('x: ' + event.x);
-		if(face_tracking_on) {
-			$('#silhouette').css('left', (190 - event.x) + 'px');
-			$('#video').css('-webkit-mask-position', (event.x - 190) + 'px 0px');
-			$('#photo-canvas').css('-webkit-mask-position', (event.x - 190) + 'px 0px');
-		}
-	  }
-	);
-		
-});
+}, false);
