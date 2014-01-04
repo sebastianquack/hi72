@@ -9,28 +9,321 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require owl-carousel/owl.carousel.css
+ *= require owl-carousel/owl.theme.css
  */
 
-* {
-	padding: 0px;
-	margin: 0px;
+/************** RESET ***************/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body { height: 100% }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.5;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/****************** LAYOUT, FONTS, COLORS *****************/
+
+@font-face {
+	font-family: Steelfish;
+	src: url("/assets/steelfishrg.woff");
+}
+
+@font-face {
+	font-family: Steelfish;
+	src: url("/assets/steelfishrgit.woff");
+	font-style:italic;
 }
 
 body {
-	background-color: #333;
-	font-family: sans-serif;
+	font-family: Arial, sans-serif;
+}
+
+h1, #mainframe p {
+	font-family:Steelfish, sans-serif;
+	font-size:34px;
+	line-height:1.1em;
+	text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+body {
+	background-color:#fff;
+	color:#F0F;
+}
+
+a {
+	color:#f0f;
+	text-decoration:none;
+}
+
+em {
+	color: #F0F;
+}
+
+p.submit:hover {
+	background-color:white;
+	color:#F0F;
+}
+
+section {
+	max-width:1024px;
+	margin:auto;	
+}
+
+.slide {
+	max-width:1024px;
+	margin:auto;
+}
+
+p, input, textarea, label, form {
+	font-size: 14px;
+	letter-spacing:120%;
+	margin-bottom: 1.5em;
+}
+
+p {
+	color: #333;
+}
+
+h3 {
+	text-transform:uppercase;
+	margin-bottom: 1.5em;
+	color: #f0f;
+}
+
+/**** BORDER ****/
+
+section, #mainframe canvas, nav .slide, #canvas_outline {
+	border:dashed 1px #f0f;
+}
+
+section, nav .slide {
+	border-width:0 0 1px 0;
+}
+
+section:last-child {
+	border:0;
+}
+
+/**** FORMS ****/
+
+label {
+	display:block;
+	margin-bottom:1em;
+}
+
+textarea, input[type="text"] {
+	width:100%;
+	display:block;
+}
+
+textarea {
+	height:120px;
+}
+
+p.submit {
+	font-size:24px;
+	text-align:center;
+	margin-bottom:1em;
+	cursor:pointer;
+}
+
+/****************** ELEMENTS *********************/
+
+/**** MENUS ****/
+
+#navigation {
+	position:fixed;
+	z-index:2;
+	width:100%;
+	padding-top:5px;
+	background-color: #fff;
+}
+
+#navigation img {
+	display:block;
+	clear:both;
+	margin:5px auto 5px auto;
+	width:400px;
+}
+
+ul.navigation li {
+	display:block;
+	float:left;
+	text-transform: uppercase;
+	color: #f0f;
+}
+
+ul.navigation li:after {
+	content: " – ";
+	white-space:pre;
+}
+
+ul.navigation li:last-child:after {
+	content: "";
+}
+
+#language {
+	float:right;
+	white-space:nowrap;
+}
+
+/**** canvas outline effect ***/
+
+#canvas_outline {
+	position:fixed;
+	z-index: 10;
+	width:464px;
+	height:660px;
+
+	left: 50%;
+	margin-left: -232px;
+	top: 100px;
+
+}
+
+/**** FRONT PAGE ****/
+
+#front {
+    height:100%;
+    width:100%;
+    background-image: url("/assets/bg_1.jpg");
+    background-attachment:fixed;
+    background-size: cover;
+    text-align:center;
+	padding-top: 50px;
+}
+
+#front img {
+	width:59%;
+}
+
+h1 {
+	text-transform:uppercase;
+	text-align:center;
+	color: #fff;
+}
+
+h1 em {
+	color: #f0f;
+}
+
+p.credits {
+	font-family: Steelfish;
+	font-size: 21px;
+	line-height: 21px;
+	letter-spacing: 0.1px;
+	text-align: center;
+	color: #000;	
+}
+
+p.credits small {
+	font-size: 15px;
+}
+
+p.credits strong {
+	font-size: 34px;
+	line-height: 38px;
+}
+
+p.credits em {
+	color: #f0f;
+	text-transform: uppercase;
+}
+
+p.credits em a {
+	color: #f0f;
+}
+
+
+/**** POSTERS ****/
+
+#posters {
+	padding-top: 130px;
+}
+
+#posters .small-logo {
+	display: block;
+	margin: 0 auto;
+}
+
+#carousel {
+	width:100%;
+}
+
+#carousel li {
+  display: block;
+  width: 100%;
+  height: auto;
+  text-align:center;
+}
+
+#carousel li img.poster-image {
+	width: 400px;
+}
+
+#mainframe {
+	width:464px;
+	margin:auto;
+}
+
+#mainframe canvas {
+	width:464px;
+	height:660px;
 }
 
 video {
 	display: none;
 }
 
-.image-layer {
+#titles {
+	top: 400px;
 	position: absolute;
-	left: 0px;
-	top: 0px;	
-	width: 640px;
-	height: 480px;	
+	width: 464px;
 }
 
 .poster-title {
@@ -39,23 +332,31 @@ video {
 	z-index: 10;
 	color: #f0f;	
 	margin: 0 auto;
-	position: absolute;
 	text-align: center;
-	width: 640px;
-}
-
-label {
-	color: #fff;
+	width: 100%;
 }
 
 #title {
-	top: 300px;
 	font-size: 50px;
 }
 
 #subtitle {
-	top: 360px;
 	font-size: 20px;
+}
+
+#controls {
+	top: 600px;
+	position: absolute;
+	width: 464px;	
+	background-color: rgba(0,0,0,0.1);
+}
+
+#controls table.selectors {
+	float: left;
+}
+
+#controls div.buttons {
+	float: left;
 }
 
 #clear {
@@ -66,8 +367,25 @@ label {
 	display: none;
 } 
 
-div.poster {
-	float:left;
+
+#mainframe p {
+	text-align:center;
+	font-size:18px;
+}
+
+
+/**** SECTIONS ****/
+
+section .slide {
+	max-width: 464px;
+	margin-bottom:1.5em;
+	padding-top: 20px;
+}
+
+/*************** RESPONSiVE ************/
+
+.owl-item {
+	position:relative;
 }
 
 

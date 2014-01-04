@@ -9,7 +9,7 @@ class PostersController < ApplicationController
     @poster = Poster.new(params.permit(:image))
     @poster.save
     
-    render json: @poster
+    render :partial => 'posters/gallery_template', :locals => {:poster => @poster}
   end
 
   # GET /posters

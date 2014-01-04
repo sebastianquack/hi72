@@ -1,60 +1,153 @@
-<h1>The Generator</h1>
-<canvas id="canvas" width="640" height="480"></canvas>
- 
-<div id="titles" class="image-layer">
- 	<input id="title" class="poster-title" value="Title">
- 	<input id="subtitle" class="poster-title" value="Subtitle">
-</div>
-
-<br>
-
-<div id="selectors">
-<label>City</label>
-<select id="select-background">
-  <option value="0">none</option>
-  <option value="1">hagen</option>
-  <option value="2">witten</option>
-</select>
-
-<label>Disaster</label>
-<select id="select-disaster">
-  <option value="0">none</option>
-  <option value="1">lightning</option>
-  <option value="2">fire</option>
-</select>
-
-<label>You</label>
-<select id="select-silhouette">
-  <option value="0">none</option>
-  <option value="1">godzilla</option>
-  <option value="2">guy</option>
-  <option value="3">guy sepia</option>
-</select>
-</div>
-
-<button id="snap">Ready</button>
-<button id="clear">Back</button>
-<button id="submit">Save & Share</button>
-
-<h1>The Gallery</h1>
-<div id="poster-gallery">
-
-    <% @posters.each do |poster| %>
-	<div class="poster">
-		<%= image_tag poster.image.url(:medium) %><br>
-		<a href="#" 
-		  onclick="window.open(
-		      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('<%= absolute_attachment_url(poster.image) %>'), 
-		      'facebook-share-dialog', 
-		      'width=626,height=436'); 
-		    return false;">
-		    <img src="/assets/facebook.png"/>
-		</a>
-		<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= absolute_attachment_url(poster.image) %>" data-lang="en" data-related="anywhereTheJavascriptAPI" data-count="none">Tweet</a>
-
+<nav id="navigation">
+	<div class="slide">
+		<ul class="navigation">
+			<li><a href="#front">Start</a></li>
+			<li><a href="#posters">Poster Generator</a></li>
+			<li><a href="#gameful">Gameful Architecture</a></li>
+			<li><a href="#championship">A World Championship</a></li>
+			<li><a href="#suggest">Suggest A Site</a></li>
+		</ul>
+		<div id="language">
+			<a hreflang="en" href="/en">EN</a>
+			/
+			<a hreflang="de" href="/">DE</a>
+		</div>
+		<br style="clear:both">
 	</div>
-	<% end %>
-	
+	<img class="small-logo" src="assets/logo_small2.png">
+</nav>
+
+<div id="canvas_outline"></div>
+
+<div id="front">
+	<div class="slide">
+		<img src="assets/logo_large.png">
+		<h1>
+			<em>Save your city</em> from urban boredom: <br>
+			<em>Create a disaster</em> and step into the picture <br>
+			Become a world champion in <br>
+			<em>72 hour interactions.</em>
+		</h1>
+	</div>
 </div>
+
+<div id="posters">
+	<img class="small-logo" src="assets/logo_small2.png">
+	<div id="carousel-width"></div>
+	<ul id="carousel" class="owl-carousel">
+
+		<%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters[0]} %>
+
+		<li class="item">
+			<div id="mainframe">
+				
+				<%= render :partial => 'posters/generator' %>
+
+			</div>
+		</li>
+				
+		<% @posters[1..(@posters.length-1)].each do |poster| %>
+		<%= render :partial => 'posters/gallery_template', :locals => {:poster => poster} %>
+		<% end %>
+
+	</ul>
+</div>
+
+<div id="content">
+
+	<section id="credits">
+		<div class="slide">
+
+	<p class="credits">Urbane Künste Ruhr <small>presents an event by </small>72 HOUR URBAN ACTION & INVISIBLE PLAYGROUND<br>
+	72 HOUR INTERACTIONS – A World Championship of Gameful Architecture<br>
+	<strong>JULY 2014 in THE RUHR VALLEY</strong><br>
+	5 INTERNATIONAL TEAMS, 5 MISSIONS TO CHANGE<br>
+	 THE RULES... AN THE URBAN LANDSCAPE IN ONLY 72 HOURS!<br>
+	<em>Contact us!<a href="mailto:inFo@72hourinteraCtionS.Com">inFo@72hourinteraCtionS.Com</a></em>
+	</p>
+	</div>
+	</section>
+	<section id="gameful">
+		<div class="slide">
+			<h3>Gameful Architecture</h3>
+			<p>
+				This summer, for the first time in the history of the ruhrgebiet, and for the first time in history in general, one city will become home to a cultural ex- periment taking architecture and urban interventions into the realm of game design and vice versa.
+			</p>
+			<p>
+				We believe gameful architecture can change the scale, feel and use of a public space, affecting the social fabric in it. Gameful architecture asks: What is a “serious” use and what is "play”? Should cities separate these forms of use? or should they teach a responsible, accountable, open way to play with the urban landscape, regardless of it officially being a “play- ground” or a “serious” public space.
+			</p>
+		</div>
+	</section>
+
+	<section id="championship">
+		<div class="slide">
+			<h3>A World Championship</h3>
+			<p>
+				We believe that anyone can become a champion of our shared universe. But it is not easy. We all need inspiration, support, knowledge, a great team. and nothing will happen if we do not challenge ourselves. this is why only one team can win the world championship of 72 hour intEractionS. are you up for the challenge? are you generous enough to contribute your skills to this shared adventure?
+			</p>
+			<p>
+				So how does this work? Each of the 5 teams will represent one city in the ruhr Valley, and consist of a mix of residents of the team’s city and partici- pants joining from all over the world. during the championship event, the teams will take over a street in the hosting city and transform five neglected sites through gameful architecture interventions. these teams will include game designers and architects, local craftspeople, international designers of all sorts, ruhrtal association enthusiasts and professional hobbyists. architects, tuftlers and tinkerers, gamers, designers, scenographers, phi- losophers and all diY enthusiasts are invited to apply to participate in the competition event.
+			</p>
+			<p>
+				You can apply as an individual or as a small team (up to six people), and we will put you together with other members to make a team of superpowers and talents – worthy to represent 5 great cities of the ruhr Valley.
+			</p>
+			<p>
+				The teams will have only three days and nights to design and build the in- terventions, on site and in real-time. on launch day the teams will be given their mission for the first time and will have just the 72 hour time span to design a response to the site's potential, and build it then and there in 1:1 scale. teams will have to handle challenges of no sleep, working with new people, and around curious neighbours to get the work done. this is an ex- treme version of home make over, only outside and on the streets of a ruhr- tal city.					
+			</p>
+
+
+			<form>
+				
+				<label for="email">applications will open on february 15.<br>
+Enter your E-mail-address here to be informed when we are ready:</label>
+				<input type="text" id="email"></input>
+				
+				<p class="submit">Submit</p>
+			
+			</form>
+
+
+		</div>
+	</section>
+
+	<section id="suggest">
+		<div class="slide">
+			<h3>Suggest A Site</h3>
+			
+			<form>
+				
+				<label for="place">describe a place where you think the championship should be held:</label>
+				<textarea id="place"></textarea>
+
+				<label for="why">Why do you think the championship should take place there?</label>
+				<textarea id="why"></textarea>
+				
+				<label for="what">What would you like to bring to the world championship?</label>
+				<textarea id="what"></textarea>					
+
+				<label for="name">Your name:</label>
+				<input type="text" id="name"></input>
+
+				<label for="email">Your E-mail:</label>
+				<input type="text" id="email"></input>
+				
+				<p class="submit">Submit</p>
+			
+			</form>
+			
+			<p>
+				What we are looking for: a street, somewhere in hattingen, Wetter, hagen, Witten or herdecke. a street with people from a broad range of backgrounds that are ready to take things into their own hands – and are open to collabo- rate with people from the four other cities and all around the world. a street with a range of atmospheres. a street facing a range of challenges, where everything changes drastically during a 5 minute walk. a street where we can create a camp for 50 international participants with enough space to work, play, cook and celebrate!
+			</p>
+			<p>
+				once we have identified a street, we will search for micro-sites, chosen to reflect potential and local needs. micro-sites are big enough for the commu- nity to enjoy, but too small to be officially renovated: the gap between two buildings; a street corner where nothing ever grows; an empty space behind a bus stop; the abandoned lot next to the local store.
+			</p>
+			<p>
+				the city that will host the championship will be decided by a jury consisting of urbane Künste ruhr, 72 hour urban action, invisible Playground, as well as architect nathalie Pozzi, game designer Eric Zimmerman, and urbanist Phillip misselwitz - Who will also serve as judges in the championship event. the hosting city will be announced on februrary 15.
+			</p>
+		</div>
+	</section>	
+
+</div>
+
 
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require owl-carousel/owl.carousel.min.js
+
 //= require_tree .
 
 // Convert dataURL to Blob object
@@ -28,7 +30,7 @@ function dataURLtoBlob(dataURL) {
    return new Blob([new Uint8Array(array)], {type: 'image/png'});
 }
 
-window.addEventListener("DOMContentLoaded", function() {
+function init_poster_generator() {
 
 	var canvas = document.getElementById("canvas");
 	var	context = canvas.getContext("2d");
@@ -92,17 +94,17 @@ window.addEventListener("DOMContentLoaded", function() {
 		return obj;
 	}
 
-	background_images[1] = create_image('background_1_transparent.png');
-	background_images[2] = create_image('background_2_transparent.png');
+	background_images[1] = create_image('HG1_transparent.png');
 
-	disaster_images[1] = create_image('effect_1.png');
-	disaster_images[2] = create_image('effect_2.png');
+	disaster_images[1] = create_image('blitz.png');
 
-	mask_images[2] = create_image('silhouette_1_mask.png');
-	mask_images[3] = create_image('silhouette_2_mask.png');
+	mask_images[2] = create_image('Bauhelm_silo.png');
+/*	mask_images[3] = create_image('Hammer_silo.png');
+	mask_images[4] = create_image('xray_silo.png');*/
 
-	silhouette_images[2] = create_image('silhouette_1.png');
-	silhouette_images[3] = create_image('silhouette_2.png');
+	silhouette_images[2] = create_image('Bauhelm_kl.png');
+/*	silhouette_images[3] = create_image('Hammer_kl.png');
+	silhouette_images[4] = create_image('xray_kl.png');*/
 
 	// calculate and display live video effects
 	function apply_effects() {
@@ -122,7 +124,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			context.globalCompositeOperation = 'source-atop';
 		
 			// add video image to canvas
-			context.drawImage(frame_canvas, 0, 0);
+			context.drawImage(frame_canvas, 0, 200);
 			
 			context.globalCompositeOperation = 'destination-over';
 			context.drawImage(silhouette_images[silhouette_id], mask_offset_x, mask_offset_y);
@@ -161,7 +163,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	htracker.init(video, tracking_canvas);
 	htracker.start();
 	
-	var face_tracking_on = true;
+	var face_tracking_on = false;
 	
 	// when face moves change offsets of mask and silhouette
 	document.addEventListener('facetrackingEvent', 
@@ -204,7 +206,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		context.fillText($('#subtitle').val(), x, 370);
 
 		$('#titles').hide();
-		$('#selectors').hide();
+		$('.selectors').hide();
 		$('#snap').hide();
 		$('#clear').show();
 		$('#submit').show();		
@@ -213,7 +215,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	$('#clear').click(function() {
 		$('#clear').hide();
 		$('#submit').hide();
-		$('#selectors').show();		
+		$('.selectors').show();		
 		$('#snap').show();
 		
 		video.play();
@@ -241,12 +243,77 @@ window.addEventListener("DOMContentLoaded", function() {
 	        processData: false,
 	        contentType: false,
 	     }).done(function(data) {
-			 alert(data);
+			 $('#mainframe').html(data);
 		 });	
 
 
 
 	});
-		
+}		
+
+var positionOwlItem = function() {
+	if ($(window).width() > 900 && $(window).width() <= 1200) {
+		//console.log($(".owl-item").first().width());
+		w = Math.round($(".owl-item").first().width() / 2);
+		$(".owl-item").css("left", -w + "px");
+	}
+	else {
+		$(".owl-item").css("left","0");
+	}
+}
+
+
+$(document).ready(function() {
+
+	//var navheight = jQuery('#navigation').height();
+	//jQuery('#front').css('padding-top',navheight+'px');
+
+	var logo_position = $('nav img.small-logo').offset().top;
+	$('nav img.small-logo').css('visibility', 'hidden');
+	$('nav').css('background-color', 'transparent');
 	
-}, false);
+	var logo_scroll_origin = $('#posters img.small-logo').offset().top; //get the offset top of the element
+
+	$(document).scroll(function() {		
+		current_logo_position = logo_scroll_origin  - $(window).scrollTop();
+		if(current_logo_position > logo_position) { // front page
+			$('nav img.small-logo').css('visibility', 'hidden');
+			$('#posters img.small-logo').css('visibility', 'visible');
+			$('nav').css('background-color', 'transparent');
+
+			$('#canvas_outline').css('visibility', 'visible');
+			$('#mainframe canvas').css('border', 'none');
+
+		} else { // later
+			$('nav img.small-logo').css('visibility', 'visible');
+			$('#posters img.small-logo').css('visibility', 'hidden');
+			$('nav').css('background-color', '#fff');
+
+			$('#mainframe canvas').css('border', 'dashed 1px #f0f');
+			$('#canvas_outline').css('visibility', 'hidden');
+		}
+	});
+
+
+	$("#carousel").owlCarousel({
+		//responsiveBaseWidth: "#carousel-width",
+		afterUpdate: positionOwlItem,
+		afterInit: positionOwlItem,
+		navigation:false,
+		pagination:false,
+		items: 3,
+    	itemsDesktop : [1200,2], 
+      	itemsDesktopSmall : [900,1],
+      	itemsTablet: [600,1],
+      	itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option		
+	});
+	
+	$('a').smoothScroll({
+		offset: -80
+	});
+	
+	init_poster_generator();
+	
+});
+
+$(window).resize(positionOwlItem);
