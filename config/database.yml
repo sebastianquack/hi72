@@ -14,7 +14,7 @@ test:
 production:
   adapter: mysql
   database: usr_web94_1
-  host: localhost
+  host: 127.0.0.1
   username: web94
   password: S15CE4iJ
 
