@@ -1,56 +1,72 @@
 <nav id="navigation">
 	<div class="slide">
+		<img id="small-logo" src="assets/logo_small2.png" class="front-link">
 		<ul class="navigation">
-			<li><a class="front-link" href="#front">Start</a></li>
-			<li><a href="#posters">Poster Generator</a></li>
+			<li><a href="#posters" class="gallery-link">Poster Gallery</a></li>
+			<li><a href="#generator" class="generator-link">Poster Generator</a></li>
 			<li><a href="#gameful">Gameful Architecture</a></li>
 			<li><a href="#championship">A World Championship</a></li>
 			<li><a href="#suggest">Suggest A Site</a></li>
 		</ul>
 		<div id="language">
-			<a hreflang="en" href="/en">EN</a>
-			/
+			<a hreflang="en" href="/en" class="active">EN</a><br>
 			<a hreflang="de" href="/">DE</a>
 		</div>
-		<br style="clear:both">
 	</div>
 </nav>
-<div id="small-logo">
-	<img src="assets/logo_small2.png" class="front-link">
+<div class="nav-bg">
+	<div class="slide">
+		<a href="#" class="prev"><</a>
+		<a href="#" class="next">></a>
+	</div>
 </div>
 
 <div id="front-cover">
+	
+	<div id="canvas-outline"></div>
+	
 	<img src="assets/logo_large.png">
 	
-	<h1>
-	<em>Save your city</em> from urban boredom: <br>
-	<em>Create a disaster</em> and step into the picture <br>
-		Become a world champion in <br>
-	<em>72 hour interactions.</em>
-	</h1>
+	<p class="credits">Urbane Künste Ruhr <small>presents an event by </small>72 HOUR URBAN ACTION & INVISIBLE PLAYGROUND<br>
+	72 HOUR INTERACTIONS – A World Championship of Gameful Architecture<br>
+	<strong>JULY 2014 in THE RUHR VALLEY</strong><br>
+	5 INTERNATIONAL TEAMS, 5 MISSIONS TO CHANGE THE RULES...<br>
+	  AN THE URBAN LANDSCAPE IN ONLY 72 HOURS!<br>
+	<em>Contact us! <a href="mailto:inFo@72hourinteraCtionS.Com">inFo@72hourinteraCtionS.Com</a></em>
+	</p>
+	
+	
+	<div id="shadow"></div>
+	
+</div>
+
+<div id="generator">
+		<%= render :partial => 'posters/generator' %>	
 </div>
 
 <div id="posters">
 
-	<div id="carousel-width"></div>
 	<ul id="carousel" class="owl-carousel">
 
-		<%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters[0]} %>
+		<% if @posters.length > 0 %>
+				<%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters[0]} %>
+		<% end %>
 
 		<li class="item">
-			<div id="mainframe">
-				
-				<a href="#" class="generator-link">Create Your Own Poster</a>
-				<div id="generator">
-						<!--a href="#" class="camera-link">Don't forget to confirm your camera'</a-->
-						<%= render :partial => 'posters/generator' %>	
-				</div>
+			<div id="mainframe">				
+				<br>
+				<a href="#" class="generator-link">Save your city<br> from urban boredom: <br>
+					Create a disaster and<br> Step Into The Picture!<br>Become a<br> World Champion in<br> 72 Hour Interactions.</a><br>
+				<a href="#" class="generator-link pink">	
+				Make Your Poster Now!</a>
 				
 			</div>
 		</li>
-				
-		<% @posters[1..(@posters.length-1)].each do |poster| %>
-		<%= render :partial => 'posters/gallery_template', :locals => {:poster => poster} %>
+
+		<% if @posters.length > 1	%>			
+			<% @posters[1..(@posters.length-1)].each do |poster| %>
+				<%= render :partial => 'posters/gallery_template', :locals => {:poster => poster} %>
+				<% end %>
 		<% end %>
 
 	</ul>
@@ -58,20 +74,16 @@
 
 <div id="content">
 
-	<section id="credits">
-		<div class="slide">
-
 	<p class="credits">Urbane Künste Ruhr <small>presents an event by </small>72 HOUR URBAN ACTION & INVISIBLE PLAYGROUND<br>
 	72 HOUR INTERACTIONS – A World Championship of Gameful Architecture<br>
 	<strong>JULY 2014 in THE RUHR VALLEY</strong><br>
-	5 INTERNATIONAL TEAMS, 5 MISSIONS TO CHANGE<br>
-	 THE RULES... AN THE URBAN LANDSCAPE IN ONLY 72 HOURS!<br>
-	<em>Contact us!<a href="mailto:inFo@72hourinteraCtionS.Com">inFo@72hourinteraCtionS.Com</a></em>
+	5 INTERNATIONAL TEAMS, 5 MISSIONS TO CHANGE THE RULES...<br>
+	AN THE URBAN LANDSCAPE IN ONLY 72 HOURS!<br>
+	<em>Contact us! <a href="mailto:inFo@72hourinteraCtionS.Com">inFo@72hourinteraCtionS.Com</a></em>
 	</p>
-	</div>
-	</section>
+
 	<section id="gameful">
-		<div class="slide">
+
 			<h3>Gameful Architecture</h3>
 			<p>
 				This summer, for the first time in the history of the ruhrgebiet, and for the first time in history in general, one city will become home to a cultural ex- periment taking architecture and urban interventions into the realm of game design and vice versa.
@@ -79,11 +91,10 @@
 			<p>
 				We believe gameful architecture can change the scale, feel and use of a public space, affecting the social fabric in it. Gameful architecture asks: What is a “serious” use and what is "play”? Should cities separate these forms of use? or should they teach a responsible, accountable, open way to play with the urban landscape, regardless of it officially being a “play- ground” or a “serious” public space.
 			</p>
-		</div>
+
 	</section>
 
 	<section id="championship">
-		<div class="slide">
 			<h3>A World Championship</h3>
 			<p>
 				We believe that anyone can become a champion of our shared universe. But it is not easy. We all need inspiration, support, knowledge, a great team. and nothing will happen if we do not challenge ourselves. this is why only one team can win the world championship of 72 hour intEractionS. are you up for the challenge? are you generous enough to contribute your skills to this shared adventure?
@@ -99,7 +110,7 @@
 			</p>
 
 
-			<form>
+			<form class="border-top">
 				
 				<label for="email">applications will open on february 15.<br>
 Enter your E-mail-address here to be informed when we are ready:</label>
@@ -109,15 +120,13 @@ Enter your E-mail-address here to be informed when we are ready:</label>
 			
 			</form>
 
-
-		</div>
 	</section>
 
 	<section id="suggest">
-		<div class="slide">
+
 			<h3>Suggest A Site</h3>
 			
-			<form>
+			<form class = "border-bottom">
 				
 				<label for="place">describe a place where you think the championship should be held:</label>
 				<textarea id="place"></textarea>
@@ -147,9 +156,9 @@ Enter your E-mail-address here to be informed when we are ready:</label>
 			<p>
 				the city that will host the championship will be decided by a jury consisting of urbane Künste ruhr, 72 hour urban action, invisible Playground, as well as architect nathalie Pozzi, game designer Eric Zimmerman, and urbanist Phillip misselwitz - Who will also serve as judges in the championship event. the hosting city will be announced on februrary 15.
 			</p>
-		</div>
+			
 	</section>	
-
+	<div style="clear:both"></div>
 </div>
 
 

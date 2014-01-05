@@ -30,10 +30,13 @@ function dataURLtoBlob(dataURL) {
    return new Blob([new Uint8Array(array)], {type: 'image/png'});
 }
 
+var owl;
+
 function init_poster_generator() {
 
 	var canvas = document.getElementById("canvas");
 	var	context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
 	// setup video
 	var	video = document.createElement("video");
@@ -150,7 +153,7 @@ function init_poster_generator() {
 	    setTimeout(apply_effects, 1000/30);
 	}
 	
-	$(video).on('canplaythrough', function(){
+	$(video).off().on('canplaythrough', function(){
 	    apply_effects();
 	});
 	
@@ -166,6 +169,7 @@ function init_poster_generator() {
 	var face_tracking_on = false;
 	
 	// when face moves change offsets of mask and silhouette
+	/*
 	document.addEventListener('facetrackingEvent', 
 	  function (event) {
 		if(face_tracking_on) {
@@ -173,21 +177,25 @@ function init_poster_generator() {
 		}
 	  }
 	);
+	*/
 	
 	// layer selectors
-	$('#select-background').change(function() {
+	$("#select-background").val(0);
+	$('#select-background').off().change(function() {
 		background_id = $('#select-background').val();
 	});
 
-	$('#select-disaster').change(function() {
+	$("#select-disaster").val(0);
+	$('#select-disaster').off().change(function() {
 		disaster_id = $('#select-disaster').val();
 	});
 	
-	$('#select-silhouette').change(function() {
+	$("#select-silhouette").val(0);
+	$('#select-silhouette').off().change(function() {
 		silhouette_id = $('#select-silhouette').val();		
 	});
 	
-	$('#snap').click(function() {
+	$('#snap').off().click(function() {
 		face_tracking_on = false;		
 		video.pause();
 		
@@ -211,8 +219,13 @@ function init_poster_generator() {
 		$('#clear').show();
 		$('#submit').show();		
 	});
+
+	$('#clear').hide();
+	$('#submit').hide();
+	$('.selectors').show();		
+	$('#snap').show();
 	
-	$('#clear').click(function() {
+	$('#clear').off().click(function() {
 		$('#clear').hide();
 		$('#submit').hide();
 		$('.selectors').show();		
@@ -225,7 +238,7 @@ function init_poster_generator() {
 	});
 	
 	
-	$('#submit').click(function() {
+	$('#submit').off().click(function() {
 				
 		var dataURL = canvas.toDataURL('image/png');
 				
@@ -243,58 +256,34 @@ function init_poster_generator() {
 	        processData: false,
 	        contentType: false,
 	     }).done(function(data) {
-			 $('#mainframe').html(data);
-			 $('.item.poster').css('visibility', 'visible');
+
+			// dump new item into placeholder if it's there
+			if($('#mainframe').length > 0) {
+				$('#mainframe').replaceWith(data);				
+			} else { // add in second place and go there
+				owl.addItem(data, 1);
+				owl.jumpTo(0)  	
+			}
+
+			$('#posters').show();
+	 		$('#generator').hide();
+						
 		 });	
-
-
-
 	});
 }		
 
 var positionOwlItem = function() {
-	if ($(window).width() > 900 && $(window).width() <= 1200) {
+/*	if ($(window).width() > 900 && $(window).width() <= 1200) {
 		//console.log($(".owl-item").first().width());
 		w = Math.round($(".owl-item").first().width() / 2);
-		$(".owl-item").css("left", -w + "px");
+		$(".owl-item").css("left", w + "px");
 	}
 	else {
 		$(".owl-item").css("left","0");
-	}
+	}*/
 }
 
-
 $(document).ready(function() {
-
-	//var navheight = jQuery('#navigation').height();
-	//jQuery('#front').css('padding-top',navheight+'px');
-	/*
-	var logo_position = $('nav img.small-logo').offset().top;
-	$('nav img.small-logo').css('visibility', 'hidden');
-	$('nav').css('background-color', 'transparent');
-	
-	var logo_scroll_origin = $('#posters img.small-logo').offset().top; //get the offset top of the element
-
-	$(document).scroll(function() {		
-		current_logo_position = logo_scroll_origin  - $(window).scrollTop();
-		if(current_logo_position > logo_position) { // front page
-			$('nav img.small-logo').css('visibility', 'hidden');
-			$('#posters img.small-logo').css('visibility', 'visible');
-			$('nav').css('background-color', 'transparent');
-
-			$('#canvas_outline').css('visibility', 'visible');
-			$('#mainframe canvas').css('border', 'none');
-
-		} else { // later
-			$('nav img.small-logo').css('visibility', 'visible');
-			$('#posters img.small-logo').css('visibility', 'hidden');
-			$('nav').css('background-color', '#fff');
-
-			$('#mainframe canvas').css('border', 'dashed 1px #f0f');
-			$('#canvas_outline').css('visibility', 'hidden');
-		}
-	});*/
-
 
 	$("#carousel").owlCarousel({
 		//responsiveBaseWidth: "#carousel-width",
@@ -308,38 +297,56 @@ $(document).ready(function() {
       	itemsTablet: [600,1],
       	itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option		
 	});
+	owl = $("#carousel").data('owlCarousel');
+		
+	$('html').css('overflow', 'auto');		
 	
-	$('a').smoothScroll({
-		offset: -80
+	$('.navigation li a').click(function() {
+		if($('#front-cover').css('display') == 'block') {
+			$('#front-cover').fadeOut(800);
+			$('#content').show();
+			$('html').css('overflow', 'auto');						
+		}
 	});
-
-	$('html').css('overflow', 'hidden');		
-	
+			
 	$('#front-cover').click(function() {
-		$('#front-cover').fadeOut();
+		$('#front-cover').fadeOut(800);
 		$('#posters').show();
 		$('#content').show();
 		$('html').css('overflow', 'auto');		
+	});
+
+	$('.gallery-link').click(function(event) {
+		event.preventDefault();
+		$('#posters').show();
+		$('#generator').hide();
+	});
+
+	$('.generator-link').click(function(event) {	
+		event.preventDefault();
+
+		if($('#generator').css('display') == 'none') {
+			init_poster_generator();
+		}
+		$('#posters').hide();
+		$('#generator').show();
+				
 	});
 	
 	$('.front-link').click(function() {
 		$('#front-cover').fadeIn();
 		$('#posters').hide();
 		$('#content').hide();
-		$('html').css('overflow', 'hidden');					
 	});
-	
-	$('.generator-link').click(function(event) {
-		event.preventDefault();
-		$(this).hide();
-		
-		$('.item.poster').css('visibility', 'hidden');
-		//$('html').css('overflow', 'hidden');		
 
-		$('#generator').show();
-		init_poster_generator();
-		
+	$('a').smoothScroll({
+		offset: -100
 	});
+
+	/*
+	owl.next()   // Go to next slide
+	owl.prev()   // Go to previous slide
+	*/
 	
 });
 
