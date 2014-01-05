@@ -1,7 +1,7 @@
 <nav id="navigation">
 	<div class="slide">
 		<ul class="navigation">
-			<li><a href="#front">Start</a></li>
+			<li><a class="front-link" href="#front">Start</a></li>
 			<li><a href="#posters">Poster Generator</a></li>
 			<li><a href="#gameful">Gameful Architecture</a></li>
 			<li><a href="#championship">A World Championship</a></li>
@@ -14,25 +14,24 @@
 		</div>
 		<br style="clear:both">
 	</div>
-	<img class="small-logo" src="assets/logo_small2.png">
 </nav>
+<div id="small-logo">
+	<img src="assets/logo_small2.png" class="front-link">
+</div>
 
-<div id="canvas_outline"></div>
-
-<div id="front">
-	<div class="slide">
-		<img src="assets/logo_large.png">
-		<h1>
-			<em>Save your city</em> from urban boredom: <br>
-			<em>Create a disaster</em> and step into the picture <br>
-			Become a world champion in <br>
-			<em>72 hour interactions.</em>
-		</h1>
-	</div>
+<div id="front-cover">
+	<img src="assets/logo_large.png">
+	
+	<h1>
+	<em>Save your city</em> from urban boredom: <br>
+	<em>Create a disaster</em> and step into the picture <br>
+		Become a world champion in <br>
+	<em>72 hour interactions.</em>
+	</h1>
 </div>
 
 <div id="posters">
-	<img class="small-logo" src="assets/logo_small2.png">
+
 	<div id="carousel-width"></div>
 	<ul id="carousel" class="owl-carousel">
 
@@ -41,8 +40,12 @@
 		<li class="item">
 			<div id="mainframe">
 				
-				<%= render :partial => 'posters/generator' %>
-
+				<a href="#" class="generator-link">Create Your Own Poster</a>
+				<div id="generator">
+						<!--a href="#" class="camera-link">Don't forget to confirm your camera'</a-->
+						<%= render :partial => 'posters/generator' %>	
+				</div>
+				
 			</div>
 		</li>
 				
