@@ -80,7 +80,7 @@ table {
 }
 
 body {
-	font-family: Arial, sans-serif;
+	font-family: Roboto, sans-serif;
 	background-color:#fff;
 	color:#F0F;
 }
@@ -286,15 +286,50 @@ p.credits em a {
 
 #generator {
 	display: none;
-	width:400px;
-	height:565px;
-	margin:auto;	
-	margin-top: 100px;
+	height:572px;
+	width: 100%;
+	margin-top: 90px;
 }
+
+#controls {
+	position: absolute;
+	top: 60px;
+	left: 50%;
+	margin-left: -512px;
+	width: 1024px;	
+	z-index: 5;
+}
+
+#controls div.selectors {
+	float: left;
+}
+
+#controls div.selectors label {
+	text-transform: uppercase;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 20px;
+}
+	
+#controls div.buttons {
+	float: right;
+}
+
+#clear {
+	display: none;
+}
+
+#submit {
+	display: none;
+} 
 
 #generator canvas {
 	width:400px;
 	height:565px;
+	display:block;
+	margin:0 auto;
 }
 
 video {
@@ -302,8 +337,10 @@ video {
 }
 
 #titles {
-	top: 400px;
+	top: 550px;
 	position: absolute;
+	left: 50%;
+	margin-left: -200px;
 	width: 400px;
 }
 
@@ -311,10 +348,11 @@ video {
 	background-color: rgba(0,0,0,0.1);
 	border: none;
 	z-index: 10;
-	color: #f0f;	
+	color: #fff;	
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
+	font-family: Steelfish;
 }
 
 #title {
@@ -325,27 +363,7 @@ video {
 	font-size: 20px;
 }
 
-#controls {
-	position: absolute;
-	left: 20px;
-	top: 150px;
-	width: 300px;	
-	background-color: rgba(0,0,0,0.1);
-}
 
-#controls table.selectors {
-}
-
-#controls div.buttons {
-}
-
-#clear {
-	display: none;
-}
-
-#submit {
-	display: none;
-} 
 
 /**** POSTERS ****/
 
@@ -457,7 +475,7 @@ section h3 {
 
 /**** FORMS ****/
 
-label {
+section form label {
 	display:block;
 	margin-bottom:1em;
 }
