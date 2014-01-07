@@ -240,15 +240,17 @@ a.active {
 	margin: 0 auto;
 	margin-top: 120px;
 	z-index: 4;
+	position: relative;
 }
 
 #canvas-outline {
 	width: 400px;
 	height: 570px;
-	position: fixed;
+	position: absolute;
 	top: 90px;
 	left: 50%;
 	margin-left: -200px;
+	z-index: 3;
 }
 
 /*** credits ****/
