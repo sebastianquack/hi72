@@ -108,6 +108,10 @@ section, section form.border-top {
 	border-width:1px 0 0 0;
 }
 
+#canvas-outline {
+	border:dashed 1px #fff;
+}
+
 
 /****************** ELEMENTS *********************/
 
@@ -204,7 +208,7 @@ a.active {
 /**** FRONT PAGE ****/
 
 #front-cover {
-    background-image: url("/assets/bg_1.jpg");
+    background-image: url("/assets/witten_2.jpg");
 	
     background-attachment:fixed;
     background-size: cover;
@@ -243,44 +247,42 @@ a.active {
 
 /*** credits ****/
 
-p.credits {
-	margin-bottom: 1.5em;
-}
-
-#front-cover p.credits {
+#front-cover .credits-container {
 	margin-top: 30px;
 }
 
-p.credits {
+.credits-container {
+	width: 1024px;
+	margin: 0 auto;
+	margin-bottom: 1.5em;
+}
+
+.credits {
 	font-family: Steelfish;
-	font-size: 19px;
-	line-height: 21px;
-	letter-spacing: 0.2px;
-	text-align: center;
+	font-size: 32px;
+	line-height: 40px;
 	color: #fff;
-	max-width: 420px;
-	margin-left: auto;
-	margin-right: auto;
+	text-transform: uppercase;
 }
 
-p.credits small {
-	font-size: 15px;
-}
-
-p.credits strong {
-	font-size: 36px;
-	line-height: 38px;
-}
-
-p.credits em {
+.credits em {
 	color: #f0f;
 	text-transform: uppercase;
 }
 
-p.credits em a {
+.credits em a {
 	color: #f0f;
 }
 
+.credits.left {
+	float: left;
+	text-align: left;
+}
+
+.credits.right {
+	float: right;
+	text-align: right;
+}
 
 /*** generator ***/
 
