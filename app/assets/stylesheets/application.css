@@ -262,6 +262,7 @@ a.active {
 .credits-container {
 	width: 1024px;
 	margin: 0 auto;
+	position: relative;
 }
 
 .credits {
@@ -272,7 +273,8 @@ a.active {
 	color: #fff;
 	text-transform: uppercase;
 	z-index: 5;
-	position:relative;
+	position:absolute;
+	top: 0px;
 }
 
 .credits em {
@@ -285,12 +287,12 @@ a.active {
 }
 
 .credits.left {
-	float: left;
+	left: 0px;
 	text-align: left;
 }
 
 .credits.right {
-	float: right;
+	right: 0px;
 	text-align: right;
 }
 
