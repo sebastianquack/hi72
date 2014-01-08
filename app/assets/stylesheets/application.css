@@ -94,6 +94,10 @@ em {
 	color: #F0F;
 }
 
+b {
+	font-weight: bold;
+}
+
 /**** BORDERS ****/
 
 nav .slide, section, #generator canvas, #mainframe, #canvas-outline, section form {
@@ -446,9 +450,10 @@ h1 em {
 #content .credits-container {
 	padding-top: 6px;
 	height: 100px;
+	z-index: 0;
 }
 
-#content p.credits {
+#content .credits {
 	color: #333;
 }
 

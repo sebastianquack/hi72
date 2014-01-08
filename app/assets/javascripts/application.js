@@ -350,8 +350,6 @@ $(document).ready(function() {
 	});
 	owl = $("#carousel").data('owlCarousel');
 		
-	$('html').css('overflow', 'auto');		
-	
 	$('.navigation li a').click(function(event) {
 		if($('#front-cover').css('display') == 'block') {
 			$('#front-cover').fadeOut(800);
@@ -368,6 +366,7 @@ $(document).ready(function() {
 		$('#front-cover').fadeOut(800);
 		$('#posters').show();
 		$('#content').show();
+		$('li a.gallery-link').addClass('active');
 	});
 
 	$('.gallery-link').click(function(event) {
