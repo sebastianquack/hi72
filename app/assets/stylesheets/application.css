@@ -277,8 +277,7 @@ a.active {
 	color: #fff;
 	text-transform: uppercase;
 	z-index: 5;
-	position:absolute;
-	top: 0px;
+	margin:0 auto;
 }
 
 .credits em {
@@ -292,7 +291,7 @@ a.active {
 
 .credits.left {
 	left: 0px;
-	text-align: left;
+	text-align: center;
 }
 
 .credits.right {

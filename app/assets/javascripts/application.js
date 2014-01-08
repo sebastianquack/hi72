@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require owl-carousel/owl.carousel.min.js
 
 //= require_tree .
@@ -409,6 +408,6 @@ $(document).ready(function() {
 		owl.next()   // Go to next slide
 	});
 	
+    $(window).resize(positionOwlItem);
 });
 
-$(window).resize(positionOwlItem);
