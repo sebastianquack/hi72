@@ -408,6 +408,18 @@ $(document).ready(function() {
 		owl.next()   // Go to next slide
 	});
 	
-    $(window).resize(positionOwlItem);
+    $('#new_user').on('ajax:success', function(xhr, data, status) {
+        alert(data.msg);
+        $('#new_user input[type="email"]').val('');
+    });
+
+    $('#new_site').on('ajax:success', function(xhr, data, status) {
+        alert(data.msg);
+        $('#new_site input[type="text"], #new_site input[type="email"], #new_site textarea').val('');
+    });
+    
+    
+
 });
 
+$(window).resize(positionOwlItem);

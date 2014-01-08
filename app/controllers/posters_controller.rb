@@ -1,6 +1,9 @@
 class PostersController < ApplicationController
   before_action :set_poster, only: [:show, :edit, :update, :destroy]
 
+  layout "admin"
+  before_filter :authenticate
+
   def submit
     #File.open("#{Rails.root}/public/uploads/somefilename.png", 'wb') do |f|
     #  f.write(params[:image].read)

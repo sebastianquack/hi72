@@ -23,5 +23,8 @@ module Hi72
     config.assets.paths << "#{Rails.root}/app/assets/fonts"    
     config.assets.paths << "#{Rails.root}/app/assets/plugins"    
     
+    config.admin_user = "admin"
+    config.admin_password = "vkvdb28"
+    
   end
 end

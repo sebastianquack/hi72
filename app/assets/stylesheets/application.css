@@ -500,6 +500,7 @@ section h3 {
 section form label {
 	display:block;
 	margin-bottom:1em;
+	clear: both;
 }
 
 textarea {
@@ -524,9 +525,10 @@ section input[type="text"] {
 	width: 66%;
 }
 
-p.submit {
+section input[type="submit"] {
 	width: 20%;
-	text-align:right;
+	float: right;
+	text-align: right;
 	cursor:pointer;
 	background-color:white;
 	color:#F0F;

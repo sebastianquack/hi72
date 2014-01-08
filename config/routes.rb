@@ -1,4 +1,8 @@
 Hi72::Application.routes.draw do
+  resources :sites
+
+  resources :users
+
   resources :posters
 
   # The priority is based upon order of creation: first created -> highest priority.
