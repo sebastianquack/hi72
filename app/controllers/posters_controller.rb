@@ -2,7 +2,7 @@ class PostersController < ApplicationController
   before_action :set_poster, only: [:show, :edit, :update, :destroy]
 
   layout "admin"
-  before_filter :authenticate
+  before_filter :authenticate, except: [:submit]
 
   def submit
     #File.open("#{Rails.root}/public/uploads/somefilename.png", 'wb') do |f|

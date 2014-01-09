@@ -30,6 +30,7 @@ function dataURLtoBlob(dataURL) {
 }
 
 var owl;
+
 var canvas;
 var context;
 var stream_ref = null;
@@ -38,28 +39,21 @@ var errBack = function(error) {
 	console.log("Video capture error: ", error.code); 
 };
 var videoObj = { "video": true };
+var frame_canvas;
+var frame_context;
 
 function init_webcam() {
-	if(navigator.getUserMedia) { // Standard
-		navigator.getUserMedia(videoObj, function(stream) {
-            stream_ref = stream;
-			video.src = stream;
-			video.play();
-		}, errBack);
-	} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-		navigator.webkitGetUserMedia(videoObj, function(stream){
-            stream_ref = stream;
-			video.src = window.webkitURL.createObjectURL(stream);
-			video.play();
-		}, errBack);
-	}
-	else if(navigator.mozGetUserMedia) { // Firefox-prefixed
-		navigator.mozGetUserMedia(videoObj, function(stream){
-            stream_ref = stream;
-			video.src = window.URL.createObjectURL(stream);
-			video.play();
-		}, errBack);
-	}
+    navigator.getUserMedia = navigator.getUserMedia       || 
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia    ||
+                             navigator.msGetUserMedia;
+
+    window.URL = window.URL || window.webkitURL;
+    navigator.getUserMedia({video: true, audio: false}, function(localMediaStream) { 
+        stream_ref = localMediaStream;
+      video.autoplay = true;
+      video.src = window.URL.createObjectURL(localMediaStream);
+    }, function(error) { console.log(error); });
 }
 
 function stop_webcam() {
@@ -82,11 +76,12 @@ function init_poster_generator() {
 	video.height = canvas.height - 20;
 
 	// setup video effects
-	var frame_canvas = document.createElement('canvas');
+	frame_canvas = null
+    frame_canvas = document.createElement('canvas');
 	frame_canvas.width = canvas.width;
 	frame_canvas.height = canvas.height;
 
-	var	frame_context = frame_canvas.getContext("2d");
+	frame_context = frame_canvas.getContext("2d");
 	// flip video frame context for mirror effect
 	frame_context.translate(video.width, 0);
 	frame_context.scale(-1, 1);	    
@@ -140,7 +135,10 @@ function init_poster_generator() {
         }
         
 		// copy video frame
-		frame_context.drawImage(video, 0, 0);
+		//frame_context.drawImage(video, 0, 0);
+        if(stream_ref) {
+            frame_context.drawImage(video, 0, 0);
+        }
 
 		// clear output canvas
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -164,11 +162,13 @@ function init_poster_generator() {
 			context.drawImage(background_images[background_id], 10, 10);
 		}
 		
-		if(silhouette_id == 1) {	
-			// add video image to canvas under everything as godzilla mode
-			context.globalCompositeOperation = 'destination-over';
-			context.drawImage(frame_canvas, 10, 10);			
-		}
+        if(stream_ref) {
+            if(silhouette_id == 1) {	
+			    // add video image to canvas under everything as godzilla mode
+                context.globalCompositeOperation = 'destination-over';
+                context.drawImage(frame_canvas, 10, 10);			
+            }
+        }
 		
 		if(disaster_id == 3) {
 			context.globalCompositeOperation = 'source-over';
