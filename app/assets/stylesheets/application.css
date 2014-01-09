@@ -390,10 +390,9 @@ a.active {
 }
 
 #controls button {
-	width = 100%;
+	width: 100%;
 }
 
-	
 #clear {
 	display: none;
 }
