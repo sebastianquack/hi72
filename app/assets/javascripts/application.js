@@ -91,8 +91,10 @@ function init_webcam() {
 }
 
 function stop_webcam() {
-    stream_ref.stop();
-    stream_ref = null;
+    if(stream_ref) {
+        stream_ref.stop();
+        stream_ref = null;
+    }
 }
 
 function init_poster_generator() {
@@ -462,7 +464,8 @@ $(document).ready(function() {
 			init_poster_generator();
 		}
 		$('.prev, .next').hide();				
-		$('li a.generator-link').addClass('active');
+		$('.navigation li a').removeClass('active');
+		$('nav li a.generator-link').addClass('active');
 	});
 	
 	$('.front-link').click(function() {

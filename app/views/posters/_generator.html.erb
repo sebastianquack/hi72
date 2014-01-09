@@ -10,12 +10,12 @@
 <div id="controls">
 
     <div id="step-controls-1" class="step-controls active-step">
-        <h2>Select a background</h2>
-        <p>Choose one of five cities in the Ruhr Valley as a background. This is where all the action in your poster will take place!</p>
+        <h2><%= t :generator_step_1h %></h2>
+        <p><%= t :generator_step_1p %></p>
         
         <div class="selector-container">
         <select id="select-background">
-          <option value="0">None</option>
+          <option value="0"><%= t :generator_none %></option>
           <option value="1">Hagen</option>
           <option value="2">Witten</option>
           <option value="3">Wetter</option>
@@ -27,64 +27,64 @@
     </div>
 
     <div id="step-controls-2" class="step-controls">
-        <h2>Select a disaster</h2>
-        <p>Don't worry, it's only a poster!</p>
+        <h2><%= t :generator_step_2h %></h2>
+        <p><%= t :generator_step_2p %></p>
 
         <div class="selector-container">
         <select id="select-disaster">
-          <option value="0">None</option>
-          <option value="1">Lightning</option>
-          <option value="2">Fire</option>
-          <option value="3">Traffic</option>
+          <option value="0"><%= t :generator_none %></option>
+          <option value="1"><%= t :generator_lightning %></option>
+          <option value="2"><%= t :generator_fire %></option>
+          <option value="3"><%= t :generator_traffic %></option>
         </select>
         </div>
         
     </div>
 
     <div id="step-controls-3" class="step-controls">
-        <h2>Step into the picture!</h2>
-        <p>Choose a silhouette and move your head to the right position!</p>
+        <h2><%= t :generator_step_3h %></h2>
+        <p><%= t :generator_step_3p %></p>
         <div class="selector-container">
         <select id="select-silhouette">
-          <option value="0">None</option>
-          <option value="1">Eye in the Sky</option>
-          <option value="2">Xray Glasses</option>
-          <option value="3">Drill and Hat</option>
-          <option value="4">Action Hammer</option>
+          <option value="0"><%= t :generator_none %></option>
+          <option value="1"><%= t :generator_sky %></option>
+          <option value="2"><%= t :generator_xray %></option>
+          <option value="3"><%= t :generator_drill %></option>
+          <option value="4"><%= t :generator_hammer %></option>
         </select> 
         </div>
-        <p><p>Attention:</b> For this step, you need a webcam and either a Chrome or Firefox browser. If you have one of those browsers, don't forget to activate your webcam! There should be a prompt right under the URL bar. If it doesn't work - no problem! You can still make a nice poster, you just can't step into it.</p>
+        <p><%= t :generator_browser1_html %></p>
                
     </div>
 
     <div id="step-controls-4" class="step-controls">
-        <h2>Smile...</h2>
-        <p>Hit the button below to freeze the video and use that picture for your poster. You can try as many times as you want to get just the right facial expression...</p>
+        <h2><%= t :generator_step_4h %></h2>
+        <p><%= t :generator_step_4p %></p>
         <div class="selector-container">
-        <button id="snap">Take photo</button>
-        <button id="clear">Unfreeze</button>
+        <button id="snap"><%= t :generator_snap %></button>
+        <button id="clear"><%= t :generator_clear %></button>
         </div>
-        <p><p>Attention:</b> For this step, you need a webcam and either a Chrome or Firefox browser. If you have one of those browsers, don't forget to activate your webcam! There should be a prompt right under the URL bar. If it doesn't work - no problem! You can still make a nice poster, you just can't step into it.</p>
+        <p><%= t :generator_browser1_html %></p>
     </div>
     
     <div id="step-controls-5" class="step-controls">
-        <h2>Give your poster a title!</h2>
-        <p>Click directly on your poster and start typing a title and a subtitle. Just hit next if you don't want a title for your poster.</p>
+        <h2><%= t :generator_step_5h %></h2>
+        <p><%= t :generator_step_5p %></p>
     </div>
     
     <div id="step-controls-6" class="step-controls">
-        <h2>Save & Share</h2>
-        <p>Once you hit submit, your poster will be saved and published. You will then be able to share it with your friends!</p>
+        <h2><%= t :generator_step_6h %></h2>
+        <p></p>
         <div class="selector-container">
-        <button id="submit">Submit</button>
-        <span class="wait">Please wait...</span>			
+        <button id="submit"><%= t :generator_submit %></button>
+        <span class="wait"><%= t :generator_wait %></span>			
         </div>
-        <p><p>Attention:</b> For this step, you will need an up-to-date Chrome, Firefox or Safari browser.</p>
+        <p><%= t :generator_browser2_html %></p>
     </div>
         
     <div id="generator-step-nav">
-        <div id="prev-step">back</div>
-        <div id="next-step">next</div>
+        <div id="prev-step"><%= t :generator_previous %></div>
+        <div id="next-step"><%= t :generator_next %></div>
     </div>
 
 </div> 
@@ -93,8 +93,8 @@
 <div id="canvas-inline"></div>
 
 <div id="titles">
- 	<input id="title" class="poster-title" value="Title">
- 	<input id="subtitle" class="poster-title" value="Subtitle">
+ 	<input id="title" class="poster-title" value="<%= t :generator_title %>">
+ 	<input id="subtitle" class="poster-title" value="<%= t :generator_subtitle %>">
 </div>
 
 
