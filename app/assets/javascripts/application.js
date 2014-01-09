@@ -30,42 +30,56 @@ function dataURLtoBlob(dataURL) {
 }
 
 var owl;
+var canvas;
+var context;
+var stream_ref = null;
+var video; 
+var errBack = function(error) {
+	console.log("Video capture error: ", error.code); 
+};
+var videoObj = { "video": true };
 
-function init_poster_generator() {
-
-	var canvas = document.getElementById("canvas");
-	var	context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-	// setup video
-	var	video = document.createElement("video");
-	video.width = canvas.width - 20;
-	video.height = canvas.height - 20;
-
-	/* this is taken over by headtracking library
-	var videoObj = { "video": true };
-	var errBack = function(error) {
-		console.log("Video capture error: ", error.code); 
-	};
-
+function init_webcam() {
 	if(navigator.getUserMedia) { // Standard
 		navigator.getUserMedia(videoObj, function(stream) {
+            stream_ref = stream;
 			video.src = stream;
 			video.play();
 		}, errBack);
 	} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
 		navigator.webkitGetUserMedia(videoObj, function(stream){
+            stream_ref = stream;
 			video.src = window.webkitURL.createObjectURL(stream);
 			video.play();
 		}, errBack);
 	}
 	else if(navigator.mozGetUserMedia) { // Firefox-prefixed
 		navigator.mozGetUserMedia(videoObj, function(stream){
+            stream_ref = stream;
 			video.src = window.URL.createObjectURL(stream);
 			video.play();
 		}, errBack);
 	}
-	*/
+}
+
+function stop_webcam() {
+    stream_ref.stop();
+    stream_ref = null;
+}
+
+function init_poster_generator() {
+
+    var step = 1;
+
+	canvas = document.getElementById("canvas");
+	context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+	// setup video
+    video = null;
+	video = document.createElement("video");
+	video.width = canvas.width - 20;
+	video.height = canvas.height - 20;
 
 	// setup video effects
 	var frame_canvas = document.createElement('canvas');
@@ -87,7 +101,7 @@ function init_poster_generator() {
 
 	var background_id = 0;
 	var disaster_id = 0;
-	var silhouette_id = 0;
+	var silhouette_id = 1;
 
 	// load layer images
 	var background_images = [];
@@ -100,32 +114,6 @@ function init_poster_generator() {
 		obj.src = 'assets/' + path;
 		return obj;
 	}
-
-	/*
-	<select id="select-background">
-	  <option value="0">None</option>
-	  <option value="1">Hagen</option>
-	  <option value="2">Witten</option>
-	</select>
-
-	<label>Disaster:</label>
-	<select id="select-disaster">
-	  <option value="0">None</option>
-	  <option value="1">Lightning</option>
-	  <option value="2">Fire</option>
-	  <option value="3">Traffic</option>
-	</select>
-
-
-	<label>You:</label>
-	<select id="select-silhouette">
-	  <option value="0">None</option>
-	  <option value="1">Eye in the Sky</option>
-	  <option value="2">Xray Glasses</option>
-	  <option value="3">Drill and Hat</option>
-	  <option value="4">Action Hammer</option>
-	</select>
-*/
 
 	background_images[1] = create_image('cities/HG1_transparent.png');
 	background_images[2] = create_image('cities/background_2_transparent.png');
@@ -144,9 +132,13 @@ function init_poster_generator() {
 
 	// calculate and display live video effects
 	function apply_effects() {
-	    if( video.paused || video.ended ) {
-	        return;
-	    }
+
+        if($('#generator').css('display') == 'none') {
+            stop_webcam();
+            console.log('generator off');
+            return;
+        }
+        
 		// copy video frame
 		frame_context.drawImage(video, 0, 0);
 
@@ -165,14 +157,7 @@ function init_poster_generator() {
 			context.globalCompositeOperation = 'destination-over';
 			context.drawImage(silhouette_images[silhouette_id], 10 + mask_offset_x, 10 + mask_offset_y);
 		}
-		
-		/*
-		// add disaster
-		if(disaster_id != 3) {
-			context.globalCompositeOperation = 'destination-over';
-			context.drawImage(disaster_images[disaster_id], 0, 0);
-		}*/
-		
+				
 		// add city		
 		if(background_id > 0) {
 			context.globalCompositeOperation = 'destination-over';
@@ -196,15 +181,34 @@ function init_poster_generator() {
 			disaster_context.blendOnto(context,'overlay');
 		}
 		
+        if(step == 6) {
+            context.textAlign = 'center';
+            var x = canvas.width / 2;
+            context.textBaseline = 'middle';
+
+            context.globalCompositeOperation = 'source-over';
+
+            if($('#title').val() != 'Title') {
+                context.fillStyle = $('#title').css('color');
+                context.font = $('#title').css('font');
+                context.fillText($('#title').val(), x, 425);
+            }
+
+            if($('#subtitle').val() != 'Subtitle') {
+                context.fillStyle = $('#subtitle').css('color');
+                context.font = $('#subtitle').css('font');
+                context.fillText($('#subtitle').val(), x, 470);
+            }
+        }
+        
 	    // Repeat at 30 fps
 	    setTimeout(apply_effects, 1000/30);
 	}
 	
-	$(video).off().on('canplaythrough', function(){
-	    apply_effects();
-	});
-	
+    apply_effects();
+    	
 	// setup head tracking
+    /*
 	var htracker = new headtrackr.Tracker({ui : false});
 	var tracking_canvas = document.createElement("canvas");
 	tracking_canvas.width = canvas.width;
@@ -212,9 +216,9 @@ function init_poster_generator() {
 	
 	htracker.init(video, tracking_canvas);
 	htracker.start();
+    */
 	
 	var face_tracking_on = false;
-	
 	// when face moves change offsets of mask and silhouette
 	/*
 	document.addEventListener('facetrackingEvent', 
@@ -226,6 +230,59 @@ function init_poster_generator() {
 	);
 	*/
 	
+    function load_step() {
+        if(step == 1) {
+            $('#prev-step').hide();            
+        } else {
+            $('#prev-step').show();            
+        }
+        if(step == 6) {
+            $('#next-step').hide();    
+        } else {
+            $('#next-step').show();    
+        }
+
+        $('.step-controls').removeClass('active-step');
+        $('#step-controls-' + step).addClass('active-step');
+        
+        $('#step-numbers div').removeClass('active-step');
+        $('#step-number-' + step).addClass('active-step');
+        
+        if(step == 3) { 
+        	/* this is also taken over by headtracking library, when used */
+            if(!stream_ref) {
+                init_webcam();                
+            }            
+        }
+        
+        if(step == 5) {
+            $('#titles').show();
+            $('#title').focus();
+        } else {
+            $('#titles').hide();            
+        }
+    }
+    load_step();
+    
+    // step controls     
+    $('#next-step').off().click(function() {
+        if(step < 6) {
+            step++;
+        }
+        load_step();
+    });
+    
+    $('#prev-step').off().click(function() {        
+        if(step > 1) {
+            step--;
+        } 
+        load_step();
+    });
+    $('#step-numbers div').off().click(function(event) {
+      step = $(event.target).attr('id').substr($(event.target).attr('id').length - 1);
+      load_step();
+    });
+        
 	// layer selectors
 	$("#select-background").val(0);
 	$('#select-background').off().change(function() {
@@ -237,54 +294,28 @@ function init_poster_generator() {
 		disaster_id = $('#select-disaster').val();
 	});
 	
-	$("#select-silhouette").val(0);
+	$("#select-silhouette").val(1);
 	$('#select-silhouette').off().change(function() {
 		silhouette_id = $('#select-silhouette').val();		
 	});
+
+	$('#snap').show();
+	$('#clear').hide();
 	
 	$('#snap').off().click(function() {
 		face_tracking_on = false;		
-		video.pause();
-		
-        context.textAlign = 'center';
-        var x = canvas.width / 2;
-        context.textBaseline = 'middle';
-
-		context.globalCompositeOperation = 'source-over';
-
-		context.fillStyle = $('#title').css('color');
-		context.font = $('#title').css('font');
-		context.fillText($('#title').val(), x, 425);
-
-		context.fillStyle = $('#subtitle').css('color');
-		context.font = $('#subtitle').css('font');
-		context.fillText($('#subtitle').val(), x, 470);
-
-		$('#titles').hide();
-		$('.selectors').hide();
+		video.pause();		
 		$('#snap').hide();
 		$('#clear').show();
-		$('#submit').show();		
 	});
-
-	$('#clear').hide();
-	$('#submit').hide();
-	$('.selectors').show();		
-	$('#snap').show();
 	
 	$('#clear').off().click(function() {
-		$('#clear').hide();
-		$('#submit').hide();
-		$('.selectors').show();		
+		$('#clear').hide();		
 		$('#snap').show();
-		
-		video.play();
+    	video.play();
 		face_tracking_on = true;			
-		apply_effects();
-		$('#titles').show();
 	});
-	
-	
+		
 	$('#submit').off().click(function() {
 				
 		var dataURL = canvas.toDataURL('image/png');
@@ -312,6 +343,7 @@ function init_poster_generator() {
 				owl.jumpTo(0)  	
 			}
 
+            video.pause();
 			$('#posters').show();
 	 		$('#generator').hide();
 			$('li a.generator-link').removeClass('active');
@@ -379,10 +411,10 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		if($('#generator').css('display') == 'none') {
+            $('#posters').hide();
+    		$('#generator').show();
 			init_poster_generator();
 		}
-		$('#posters').hide();
-		$('#generator').show();
 		$('.prev, .next').hide();				
 		$('li a.generator-link').addClass('active');
 	});

@@ -1,47 +1,95 @@
-<canvas id="canvas" width="400" height="565"></canvas>
+<div id="step-numbers">
+    <div id="step-number-1" class="active-step"></div>
+    <div id="step-number-2"></div>
+    <div id="step-number-3"></div>
+    <div id="step-number-4"></div>
+    <div id="step-number-5"></div>
+    <div id="step-number-6"></div>
+</div>
 
 <div id="controls">
 
-	<div class="selectors">
-<label>City:</label>
-<select id="select-background">
-  <option value="0">None</option>
-  <option value="1">Hagen</option>
-  <option value="2">Witten</option>
-</select>
+    <div id="step-controls-1" class="step-controls active-step">
+        <h2>Select a background</h2>
+        <p>Choose one of five cities in the Ruhr Valley as a background. This is where all the action in your poster will take place!</p>
+        
+        <div class="selector-container">
+        <select id="select-background">
+          <option value="0">None</option>
+          <option value="1">Hagen</option>
+          <option value="2">Witten</option>
+        </select>
+        </div>
+        
+    </div>
 
-<label>Disaster:</label>
-<select id="select-disaster">
-  <option value="0">None</option>
-  <option value="1">Lightning</option>
-  <option value="2">Fire</option>
-  <option value="3">Traffic</option>
-</select>
+    <div id="step-controls-2" class="step-controls">
+        <h2>Select a disaster</h2>
+        <p>Don't worry, it's only a poster!</p>
 
+        <div class="selector-container">
+        <select id="select-disaster">
+          <option value="0">None</option>
+          <option value="1">Lightning</option>
+          <option value="2">Fire</option>
+          <option value="3">Traffic</option>
+        </select>
+        </div>
+        
+    </div>
 
-<label>You:</label>
-<select id="select-silhouette">
-  <option value="0">None</option>
-  <option value="1">Eye in the Sky</option>
-  <option value="2">Xray Glasses</option>
-  <option value="3">Drill and Hat</option>
-  <option value="4">Action Hammer</option>
-</select>
+    <div id="step-controls-3" class="step-controls">
+        <h2>Step into the picture!</h2>
+        <p>Choose a silhouette and move your head to the right position!</p>
+        <div class="selector-container">
+        <select id="select-silhouette">
+          <option value="0">None</option>
+          <option value="1">Eye in the Sky</option>
+          <option value="2">Xray Glasses</option>
+          <option value="3">Drill and Hat</option>
+          <option value="4">Action Hammer</option>
+        </select> 
+        </div>
+        <p>For this step, please activate your webcam. There should be a prompt right under the URL bar. If not - no problem! You can still make a nice poster.</p>
+               
+    </div>
 
-</div>
+    <div id="step-controls-4" class="step-controls">
+        <h2>Smile...</h2>
+        <p>Hit the button below to freeze the video and use that picture for your poster. You can try as many times as you want to get just the right facial expression...</p>
+        <div class="selector-container">
+        <button id="snap">Take photo</button>
+        <button id="clear">Unfreeze</button>
+        </div>
+    </div>
+    
+    <div id="step-controls-5" class="step-controls">
+        <h2>Give your poster a title!</h2>
+        <p>Click directly on your poster and start typing a title and a subtitle. Just hit next if you don't want a title for your poster.</p>
+    </div>
+    
+    <div id="step-controls-6" class="step-controls">
+        <h2>Save & Share</h2>
+        <p>Once you hit submit, your poster will be saved and published. You will then be able to share it with your friends!</p>
+        <div class="selector-container">
+        <button id="submit">Submit</button>			
+        </div>
+    </div>
+        
+    <div id="generator-step-nav">
+        <div id="prev-step">back</div>
+        <div id="next-step">next</div>
+    </div>
 
-<div class="buttons">
-	<button id="snap">Ready</button>
-	<button id="clear">Back</button>
-	<button id="submit">Save & Share</button>			
-</div>
+</div> 
 
-</div>
+<canvas id="canvas" width="400" height="565"></canvas>
+<div id="canvas-inline"></div>
 
- 
 <div id="titles">
  	<input id="title" class="poster-title" value="Title">
  	<input id="subtitle" class="poster-title" value="Subtitle">
 </div>
+
 
 

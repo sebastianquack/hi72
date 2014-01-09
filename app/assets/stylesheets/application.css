@@ -100,7 +100,7 @@ b {
 
 /**** BORDERS ****/
 
-nav .slide, section, #generator canvas, #mainframe, #canvas-outline, section form {
+nav .slide, section, #generator canvas, #mainframe, #canvas-outline, section form, .selector-container, #canvas-inline {
 	border:dashed 1px #f0f;
 }
 
@@ -112,8 +112,16 @@ section, section form.border-top {
 	border-width:1px 0 0 0;
 }
 
+.selector-container {
+	border-width:1px 0 1px 0;	
+}
+
 #canvas-outline {
 	border:dashed 1px #fff;
+}
+
+#canvas-inline {
+	border:dashed 1px #f0f;
 }
 
 
@@ -304,61 +312,139 @@ a.active {
 #generator {
 	display: none;
 	height:572px;
-	width: 100%;
-	margin-top: 90px;
+	width: 1024px;
+	margin: 0 auto;
+	margin-top: 90px;	
+	position:relative;
 }
+
+#step-numbers {
+	float: left;
+	width: 280px;
+}
+
+#step-numbers div {
+	float: left;
+	width: 137px;
+	height: 190px;
+	background-repeat: none;
+}
+
+#step-number-1 { background-image: url('numbers/1strich.png'); }
+#step-number-2 { background-image: url('numbers/2strich.png'); }
+#step-number-3 { background-image: url('numbers/3strich.png'); }
+#step-number-4 { background-image: url('numbers/4strich.png'); }
+#step-number-5 { background-image: url('numbers/5strich.png'); }
+#step-number-6 { background-image: url('numbers/6strich.png'); }
+
+#step-numbers div {
+	cursor:pointer;
+}
+#step-numbers .active-step {
+	cursor:default;
+}
+
+#step-number-1.active-step { background-image: url('numbers/1.png'); }
+#step-number-2.active-step { background-image: url('numbers/2.png'); }
+#step-number-3.active-step { background-image: url('numbers/3.png'); }
+#step-number-4.active-step { background-image: url('numbers/4.png'); }
+#step-number-5.active-step { background-image: url('numbers/5.png'); }
+#step-number-6.active-step { background-image: url('numbers/6.png'); }
 
 #controls {
-	position: absolute;
-	top: 60px;
-	left: 50%;
-	margin-left: -512px;
-	width: 1024px;	
-	z-index: 5;
+	float: right;
+	width: 210px;
 }
 
-#controls div.selectors {
-	float: left;
+#controls .step-controls {
+	display:none;
 }
 
-#controls div.selectors label {
-	text-transform: uppercase;
-	color: #333;
+#controls .step-controls.active-step {
+	display:block;
+}
+
+#controls .step-controls h2 {
+	font-family: Steelfish;
+	font-size: 53px;
+	line-height: 60px;
+	margin-bottom: 20px;
+	color: #f0f;
+}
+
+#controls .step-controls p {
 	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
+	color: #f0f;
 	font-size: 13px;
 	line-height: 20px;
-}
-	
-#controls div.buttons {
-	float: right;
+	margin-bottom: 20px;
 }
 
+#controls .selector-container {
+	padding: 20px 0px 20px 0px;
+	margin-bottom: 20px;
+}
+
+#controls .selector-container select {
+	width: 100%;
+}
+
+#controls button {
+	width = 100%;
+}
+
+	
 #clear {
 	display: none;
 }
 
-#submit {
+#generator-step-nav {
+	font-family: Steelfish;
+	font-size: 53px;
+	line-height: 60px;
+	position: absolute;
+	bottom: 0px;
+}
+
+#generator-step-nav div {
+	cursor: pointer;
+	float: left;
+	margin-right: 20px;
+}
+
+#prev-step {
 	display: none;
-} 
+}
 
 #generator canvas {
 	width:400px;
 	height:565px;
-	display:block;
-	margin:0 auto;
+	position: absolute;
+	margin-left: -200px;
+	left: 50%;
+	top: 0px;		
 }
+
+#canvas-inline {
+	width:380px;
+	height:545px;
+	position: absolute;
+	margin-left: -190px;
+	left: 50%;
+	top: 10px;		
+} 
 
 video {
 	display: none;
 }
 
 #titles {
-	top: 550px;
+	top: 400px;
 	position: absolute;
 	left: 50%;
 	margin-left: -200px;
 	width: 400px;
+	display: none;
 }
 
 .poster-title {
@@ -521,7 +607,7 @@ section input, textarea {
 	margin-bottom: 20px;
 }
 
-section input[type="text"] {
+section input[type="text"], section input[type="email"] {
 	width: 66%;
 }
 
