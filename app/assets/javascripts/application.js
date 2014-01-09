@@ -135,9 +135,15 @@ function init_poster_generator() {
         }
         
 		// copy video frame
-		//frame_context.drawImage(video, 0, 0);
-        if(stream_ref) {
+        // see http://stackoverflow.com/questions/18580844/firefox-drawimagevideo-fails-with-ns-error-not-available-component-is-not-av
+        try {
             frame_context.drawImage(video, 0, 0);
+        } catch (e) {
+           if (e.name == "NS_ERROR_NOT_AVAILABLE") { // catch bug that happens in firefox
+             //setTimeout(drawVideo, 0);
+        } else {
+             throw e;
+           }
         }
 
 		// clear output canvas
@@ -162,12 +168,10 @@ function init_poster_generator() {
 			context.drawImage(background_images[background_id], 10, 10);
 		}
 		
-        if(stream_ref) {
-            if(silhouette_id == 1) {	
-			    // add video image to canvas under everything as godzilla mode
-                context.globalCompositeOperation = 'destination-over';
-                context.drawImage(frame_canvas, 10, 10);			
-            }
+        // add video image to canvas under everything as godzilla mode
+        if(silhouette_id == 1) {	
+            context.globalCompositeOperation = 'destination-over';
+            context.drawImage(frame_canvas, 10, 10);			
         }
 		
 		if(disaster_id == 3) {
@@ -189,15 +193,15 @@ function init_poster_generator() {
             context.globalCompositeOperation = 'source-over';
 
             if($('#title').val() != 'Title') {
-                context.fillStyle = $('#title').css('color');
-                context.font = $('#title').css('font');
-                context.fillText($('#title').val(), x, 425);
+                context.fillStyle = "#fff"; //$('#title').css('color');
+                context.font = "50px Steelfish"; //$('#titl"e').css('font');
+                context.fillText($('#title').val(), x, 450);
             }
 
             if($('#subtitle').val() != 'Subtitle') {
-                context.fillStyle = $('#subtitle').css('color');
-                context.font = $('#subtitle').css('font');
-                context.fillText($('#subtitle').val(), x, 470);
+                context.fillStyle = "#fff"; //$('#subtitle').css('color');
+                context.font = "30px Steelfish"; //$('#subtitle').css('font');
+                context.fillText($('#subtitle').val(), x, 510);
             }
         }
         
