@@ -16,6 +16,40 @@
 
 //= require_tree .
 
+var NewBlob = function(data, datatype)
+{
+    var out;
+
+    try {
+        out = new Blob([data], {type: datatype});
+        console.debug("case 1");
+    }
+    catch (e) {
+        window.BlobBuilder = window.BlobBuilder ||
+                window.WebKitBlobBuilder ||
+                window.MozBlobBuilder ||
+                window.MSBlobBuilder;
+
+        if (e.name == 'TypeError' && window.BlobBuilder) {
+            var bb = new BlobBuilder();
+            bb.append(data);
+            out = bb.getBlob(datatype);
+            console.debug("case 2");
+        }
+        else if (e.name == "InvalidStateError") {
+            // InvalidStateError (tested on FF13 WinXP)
+            out = new Blob([data], {type: datatype});
+            console.debug("case 3");
+        }
+        else {
+            // We're screwed, blob constructor unsupported entirely   
+            console.debug("Error");
+        }
+    }
+    
+    return out;
+};
+
 // Convert dataURL to Blob object
 function dataURLtoBlob(dataURL) {
    // Decode the dataURL    
@@ -26,7 +60,7 @@ function dataURLtoBlob(dataURL) {
        array.push(binary.charCodeAt(i));
    }
    // Return our Blob object
-   return new Blob([new Uint8Array(array)], {type: 'image/png'});
+   return NewBlob(new Uint8Array(array), 'image/png');
 }
 
 var owl;
@@ -110,8 +144,11 @@ function init_poster_generator() {
 		return obj;
 	}
 
-	background_images[1] = create_image('cities/HG1_transparent.png');
-	background_images[2] = create_image('cities/background_2_transparent.png');
+	background_images[1] = create_image('cities/hagen_transparent.png');
+	background_images[2] = create_image('cities/witten_transparent.png');
+	background_images[3] = create_image('cities/wetter_transparent.png');
+	background_images[4] = create_image('cities/herdecke_transparent.png');
+	background_images[5] = create_image('cities/hattingen_transparent.png');
 
 	disaster_images[1] = create_image('disasters/blitz.png');
 	disaster_images[2] = create_image('disasters/feuer.png');
