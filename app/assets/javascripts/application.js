@@ -316,8 +316,13 @@ function init_poster_generator() {
 		face_tracking_on = true;			
 	});
 		
+    $('#submit').show();
+    $('.wait').hide();
 	$('#submit').off().click(function() {
 				
+        $('#submit').hide();
+        $('.wait').show();
+                
 		var dataURL = canvas.toDataURL('image/png');
 				
 	    // Get our file

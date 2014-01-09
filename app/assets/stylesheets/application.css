@@ -380,6 +380,13 @@ a.active {
 	margin-bottom: 20px;
 }
 
+span.wait {
+	font-family: 'Roboto', sans-serif;
+	color: #f0f;
+	font-size: 13px;
+	line-height: 20px;
+}
+
 #controls .selector-container {
 	padding: 20px 0px 20px 0px;
 	margin-bottom: 20px;
