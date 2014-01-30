@@ -155,14 +155,24 @@ function init_poster_generator() {
 	disaster_images[1] = create_image('disasters/blitz.png');
 	disaster_images[2] = create_image('disasters/feuer.png');
 	disaster_images[3] = create_image('disasters/traffijam_klkl.png');
+	disaster_images[4] = create_image('disasters/regen.jpg');
+	disaster_images[5] = create_image('disasters/totallove2_kl.png');
 
 	mask_images[2] = create_image('silhouettes/xray_silo.png');
 	mask_images[3] = create_image('silhouettes/Bauhelm_silo.png');
 	mask_images[4] = create_image('silhouettes/Hammer_silo.png');
+	mask_images[5] = create_image('silhouettes/bart_silo.png');
+	mask_images[6] = create_image('silhouettes/megafon_silo.png');
+	mask_images[7] = create_image('silhouettes/taube_silo.png');
 
 	silhouette_images[2] = create_image('silhouettes/xray_kl.png');
 	silhouette_images[3] = create_image('silhouettes/Bauhelm_kl.png');
 	silhouette_images[4] = create_image('silhouettes/Hammer_kl.png');
+	silhouette_images[5] = create_image('silhouettes/bart_frei_kl.png');
+	silhouette_images[6] = create_image('silhouettes/megafon_kl.png');
+	silhouette_images[7] = create_image('silhouettes/taube_kl.png');
+
+    logo_image = create_image('plakatlogo.png');
 
 	// calculate and display live video effects
 	function apply_effects() {
@@ -187,8 +197,7 @@ function init_poster_generator() {
 
 		// clear output canvas
         context.clearRect(0, 0, canvas.width, canvas.height);
-	   	context.globalCompositeOperation = 'source-over';
-
+		
 		if(silhouette_id > 1) {	
 			// prepare masking effect
 			context.drawImage(mask_images[silhouette_id], 10 + mask_offset_x, 10 + mask_offset_y);
@@ -197,10 +206,10 @@ function init_poster_generator() {
 			// add video image to canvas
 			context.drawImage(frame_canvas, 5, 200);
 			
-			context.globalCompositeOperation = 'destination-over';
+			context.globalCompositeOperation = 'source-over';
 			context.drawImage(silhouette_images[silhouette_id], 10 + mask_offset_x, 10 + mask_offset_y);
 		}
-				
+        		
 		// add city		
 		if(background_id > 0) {
 			context.globalCompositeOperation = 'destination-over';
@@ -222,8 +231,19 @@ function init_poster_generator() {
 		} else if(disaster_id == 2) {
 			disaster_context.drawImage(disaster_images[disaster_id], 0, 0);
 			disaster_context.blendOnto(context,'overlay');
+		} else if(disaster_id == 4) {
+			disaster_context.drawImage(disaster_images[disaster_id], 0, 0);
+			disaster_context.blendOnto(context,'multiply');		    
+		} else if(disaster_id == 5) {
+            disaster_context.clearRect(0, 0, canvas.width, canvas.height);
+			disaster_context.drawImage(disaster_images[disaster_id], 0, 0);
+			disaster_context.blendOnto(context,'screen');		    
 		}
-		
+		                    
+        // add logo        
+		context.globalCompositeOperation = 'source-over';
+		context.drawImage(logo_image, 10, 10);
+        
         if(step == 6) {
             context.textAlign = 'center';
             var x = canvas.width / 2;
@@ -231,13 +251,13 @@ function init_poster_generator() {
 
             context.globalCompositeOperation = 'source-over';
 
-            if($('#title').val() != 'Title') {
+            if($('#title').val() != 'Title' && $('#title').val() != 'Titel')  {
                 context.fillStyle = "#fff"; //$('#title').css('color');
                 context.font = "50px Steelfish"; //$('#titl"e').css('font');
                 context.fillText($('#title').val(), x, 450);
             }
 
-            if($('#subtitle').val() != 'Subtitle') {
+            if($('#subtitle').val() != 'Subtitle' && $('#subtitle').val() != 'Untertitel') {
                 context.fillStyle = "#fff"; //$('#subtitle').css('color');
                 context.font = "30px Steelfish"; //$('#subtitle').css('font');
                 context.fillText($('#subtitle').val(), x, 510);
