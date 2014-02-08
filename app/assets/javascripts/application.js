@@ -532,7 +532,8 @@ $(document).ready(function() {
       	itemsDesktopSmall : [900,1],
       	itemsTablet: [600,1],
       	itemsMobile : false, // itemsMobile disabled - inherit from itemsTablet option		
-        addClassActive : true
+        addClassActive : true,
+        afterMove: updatePosterHash
 	});
 	owl = $("#carousel").data('owlCarousel');
            	        
