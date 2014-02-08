@@ -113,7 +113,8 @@ function updatePosterHash() {
         
         // Todo update sharing links here
         poster_url = window.location.href;
-        image_url = window.location.host + $('div.owl-item.active:eq(1) li img').attr('src');
+        image_url = 'http://' + window.location.host + $('div.owl-item.active:eq(1) li 
+img').attr('src');
         console.log(image_url);
 
         $('#share-link').attr('href', poster_url);
@@ -123,7 +124,10 @@ function updatePosterHash() {
         $('#share-facebook').on('click', function() {
            
       	  window.open(
-      	      'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(poster_url) + '&p[images][0]=' + encodeURIComponent(image_url), 
+      	      
+'https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(poster_url)+'&p[images][0]='+encodeURIComponent(image_url)+'&p[summary]='+encodeURIComponent('A 
+World Championship of Gameful Architecture, July 2014 in Ruhr. Find out more and make your own 
+Poster...'), 
       	      'facebook-share-dialog', 
       	      'width=626,height=436'); 
         });
