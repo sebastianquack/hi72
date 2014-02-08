@@ -102,6 +102,9 @@ var posterCreated = false;
 // updates the hash depending on which poster is in the center
 function updatePosterHash() {
     index = $('div.owl-item.active').index() + 1;
+    if($('div.owl-item.active').length == 2) { // small mode
+        index--;
+    }
     console.log(posterCreated);
     if(index == 2 && posterCreated == false) { // poster generator
         window.location.hash = '';
@@ -597,7 +600,11 @@ $(document).ready(function() {
     		$('li a.gallery-link').addClass('active');
         }
     } else {
-        owl.jumpTo(1);        
+        if($('div.owl-item.active').length == 2) { // small mode
+            owl.jumpTo(2);                    
+        } else {
+            owl.jumpTo(1);                    
+        }
     }
     
 });
