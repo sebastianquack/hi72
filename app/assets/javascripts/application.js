@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require owl-carousel/owl.carousel.min.js
+//= require i18n
+//= require i18n/translations
 
 //= require_tree .
 
@@ -123,20 +125,23 @@ function updatePosterHash() {
         $('#share-link').off('click');
         
         $('#share-facebook').off('click');
-        $('#share-facebook').on('click', function() {
+        $('#share-facebook').on('click', function(event) {
            
+          event.preventDefault();
       	  window.open(
       	      
-'https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(poster_url)+'&p[images][0]='+encodeURIComponent(image_url), 
+'https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(poster_url)+'&p[images][0]='+encodeURIComponent(image_url)+'&p[summary]='+encodeURIComponent(I18n.t("social_media_prompt")), 
       	      'facebook-share-dialog', 
       	      'width=626,height=436'); 
         });
 
         $('#share-twitter').off('click');
-        $('#share-twitter').on('click', function() {
+        $('#share-twitter').on('click', function(event) {
            
+           
+          event.preventDefault(); 
       	  window.open(
-      	      'http://twitter.com/share?text='+encodeURIComponent('I made a poster for 72 Hour Interactions! Check it out here: ')+'&url='+encodeURIComponent(poster_url), 
+      	      'http://twitter.com/share?text='+encodeURIComponent(I18n.t("social_media_prompt"))+'&url='+encodeURIComponent(poster_url), 
       	      'twitter-share-dialog', 
       	      'width=626,height=436');            
         });
@@ -590,6 +595,11 @@ $(document).ready(function() {
         }
         // jump to that index
         if(index >= 0) {
+            
+            if($('div.owl-item.active').length == 2) { // small mode
+                index++;
+            }
+            
             owl.jumpTo(index - 1);        
             updatePosterHash();
             

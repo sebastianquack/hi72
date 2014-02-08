@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  short_description: "A World Championship of Gameful Architecture, this July in Ruhr. Visit http://72hourinteractions.com for all infos and to create your own cool poster!"
+  social_media_prompt: "Make your own Poster for 72 Hour Interactions!"
+  
   menu_about: "About The Project"
   menu_gallery: "Poster Gallery"
   menu_generator: "Poster Generator"

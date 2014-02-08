@@ -51,3 +51,6 @@ group :production do
   gem 'execjs'
   gem 'therubyracer'
 end
+
+gem "i18n-js"
+

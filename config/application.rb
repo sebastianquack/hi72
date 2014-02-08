@@ -26,5 +26,7 @@ module Hi72
     config.admin_user = "admin"
     config.admin_password = "vkvdb28"
     
+    config.assets.initialize_on_precompile = true
+    
   end
 end

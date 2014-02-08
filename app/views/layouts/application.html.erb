@@ -3,10 +3,20 @@
 <head>
   <title>72 Hour Interactions</title>
 	<link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => false %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag '/assets/favicon.png' %>
+
+    <meta property="og:title" content="72 HOUR INTERACTIONS">
+    <meta property="og:description" content="<%= t :short_description %>">
+
+    <%= javascript_include_tag "i18n" %>
+    <%= javascript_include_tag "translations" %>
+    <%= javascript_tag do %>
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    <% end %>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
+  before_filter :export_i18n_messages
+
+  def export_i18n_messages
+    SimplesIdeias::I18n.export! if Rails.env.development?
+  end
 
   # app/controllers/application_controller.rb
   def default_url_options(options={})
