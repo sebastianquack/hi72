@@ -127,26 +127,12 @@ function updatePosterHash() {
         $('#share-link').attr('href', poster_url);
         $('#share-link').off('click');
         
+        // FACEBOOK
         $('#share-facebook').off('click');
         $('#share-facebook').on('click', function(event) {
-            
-            
-            
            
           event.preventDefault();
-          
-          
-          /*
-      	  window.open(
-      	      
-'https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(poster_url)+'&p[images][0]='+encodeURIComponent(image_url)+'&p[summary]='+encodeURIComponent(I18n.t("social_media_prompt")), 
-      	      'facebook-share-dialog', 
-      	      'width=626,height=436'); 
-          
-         */
-         
-          FB.ui(
-               {
+          FB.ui({
                 method: 'feed',
                 name: '72 HOUR INTERACTIONS',
                 caption: 'A World Championship of Gameful Architecture',
@@ -163,17 +149,12 @@ function updatePosterHash() {
                    console.log('Post was not published.');
                  }
                }
-             );
-          
-          
-          
-          
+             );          
         });
 
+        // TWITTER
         $('#share-twitter').off('click');
-        $('#share-twitter').on('click', function(event) {
-           
-           
+        $('#share-twitter').on('click', function(event) {           
           event.preventDefault(); 
       	  window.open(
       	      'http://twitter.com/share?text='+encodeURIComponent(I18n.t("social_media_prompt"))+'&url='+encodeURIComponent(poster_url), 
@@ -218,7 +199,7 @@ function init_poster_generator() {
 
 	var background_id = 0;
 	var disaster_id = 0;
-	var silhouette_id = 1;
+	var silhouette_id = 0;
 
 	// load layer images
 	var background_images = [];
@@ -232,11 +213,20 @@ function init_poster_generator() {
 		return obj;
 	}
 
+    /*
 	background_images[1] = create_image('cities/hagen_transparent.png');
 	background_images[2] = create_image('cities/witten_transparent.png');
 	background_images[3] = create_image('cities/wetter_transparent.png');
 	background_images[4] = create_image('cities/herdecke_transparent.png');
 	background_images[5] = create_image('cities/hattingen_transparent.png');
+    */
+
+	background_images[1] = create_image('cities/hagen.jpg');
+	background_images[2] = create_image('cities/witten.jpg');
+	background_images[3] = create_image('cities/wetter.jpg');
+	background_images[4] = create_image('cities/herdecke.jpg');
+	background_images[5] = create_image('cities/hattingen.jpg');
+
 
 	disaster_images[1] = create_image('disasters/blitz.png');
 	disaster_images[2] = create_image('disasters/feuer.png');
@@ -259,6 +249,51 @@ function init_poster_generator() {
 	silhouette_images[7] = create_image('silhouettes/taube_kl.png');
 
     logo_image = create_image('plakatlogo.png');
+
+    // add image via drag & drop
+    var user_image = null;
+
+    $("#generator").off();
+    $("#generator").on("dragenter", function(event) {
+        event.preventDefault();  
+        event.stopPropagation();
+    });
+    
+    $("#generator").on("dragover", function(event) {
+        event.preventDefault();  
+        event.stopPropagation();        
+    });
+    
+    $("#generator").on("drop", function(event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+      var dt = event.originalEvent.dataTransfer;
+      var files = dt.files;
+
+      if(files.length == 1) {
+         var file = files[0];
+         var imageType = /image.*/;
+    
+         console.log(file.name);
+    
+         if(file.type.match(imageType)) {
+    
+             user_image = new Image();
+             user_image.file = file;
+    
+             var reader = new FileReader();
+             reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(user_image);
+             reader.readAsDataURL(file);
+         
+         
+          } else {
+              alert('Please only use image files.');
+          }
+      }
+       
+    });
+
 
 	// calculate and display live video effects
 	function apply_effects() {
@@ -291,7 +326,6 @@ function init_poster_generator() {
 		
 			// add video image to canvas
 			context.drawImage(frame_canvas, 5, 200);
-			
 			context.globalCompositeOperation = 'source-over';
 			context.drawImage(silhouette_images[silhouette_id], 10 + mask_offset_x, 10 + mask_offset_y);
 		}
@@ -299,8 +333,25 @@ function init_poster_generator() {
 		// add city		
 		if(background_id > 0) {
 			context.globalCompositeOperation = 'destination-over';
-			context.drawImage(background_images[background_id], 10, 10);
+			context.drawImage(background_images[background_id], 10, 10, 380, 545);
 		}
+        
+        if(user_image) {
+
+            context.globalCompositeOperation = 'destination-over';
+            
+            if(user_image.width > user_image.height) {
+                context.save();
+                var x = canvas.width / 2;
+                var y = canvas.height / 2;
+                context.translate(x, y); 
+                context.rotate(Math.PI/2);   
+    			context.drawImage(user_image, -272.5, -190, 545, 380);
+                context.restore();
+            } else {
+    			context.drawImage(user_image, 10, 10, 380, 545);            
+            }
+        }
 		
         // add video image to canvas under everything as godzilla mode
         if(silhouette_id == 1) {	
@@ -379,6 +430,7 @@ function init_poster_generator() {
 	);
 	*/
 	
+    // step controls     
     function load_step() {
         if(step == 1) {
             $('#prev-step').hide();            
@@ -413,7 +465,6 @@ function init_poster_generator() {
     }
     load_step();
     
-    // step controls     
     $('#next-step').off().click(function() {
         if(step < 6) {
             step++;
@@ -438,33 +489,34 @@ function init_poster_generator() {
 		background_id = $('#select-background').val();
 	});
 
+    
 	$("#select-disaster").val(0);
 	$('#select-disaster').off().change(function() {
 		disaster_id = $('#select-disaster').val();
 	});
 	
-	$("#select-silhouette").val(1);
+	$("#select-silhouette").val(0);
 	$('#select-silhouette').off().change(function() {
 		silhouette_id = $('#select-silhouette').val();		
 	});
 
+    // photo snapper 
 	$('#snap').show();
 	$('#clear').hide();
-	
 	$('#snap').off().click(function() {
 		face_tracking_on = false;		
 		video.pause();		
 		$('#snap').hide();
 		$('#clear').show();
-	});
-	
+	});	
 	$('#clear').off().click(function() {
 		$('#clear').hide();		
 		$('#snap').show();
     	video.play();
 		face_tracking_on = true;			
 	});
-		
+
+    // poster submit
     $('#submit').show();
     $('.wait').hide();
 	$('#submit').off().click(function() {

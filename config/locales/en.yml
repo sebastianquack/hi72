@@ -61,9 +61,11 @@ en:
   site_submit_success: "Thank you for submitting your suggestion."
   site_submit_error: "Error saving your suggestion."
 
-  generator_none: "None"
+  generator_none: "None"  
+  generator_user_image: "Individual background"
+ 
   generator_step_1h: "Select a background"
-  generator_step_1p: "Choose one of five cities in the Ruhr Valley as a background. This is where all the action in your poster will take place!"
+  generator_step_1p: "Choose one of five cities in the Ruhr Valley as a background. This is where all the action in your poster will take place! You my also use your own image file as a background. Just drag and drop onto the surface!"
   generator_step_2h: "Select a disaster"
   generator_step_2p: "Don't worry, it's only a poster!"
   generator_lightning: "Lightning"

@@ -62,8 +62,10 @@ de:
   site_submit_error: "Fehler beim Speichern Ihres Vorschlags."
   
   generator_none: "Nichts"
+  generator_user_image: "Eigener Hintergrund"
+
   generator_step_1h: "Wähle einen Hintergrund"
-  generator_step_1p: "Entscheide Dich für eine der fünf Städte des Ruhrtals. Hier wird sich alles in deinem Poster abspielen!"
+  generator_step_1p: "Entscheide Dich für eine der fünf Städte des Ruhrtals. Hier wird sich alles in deinem Poster abspielen! Du kannst auch einen eigenen Hintergrund verwenden - einfach die Datei mit der Maus auf die Fläche ziehen!"
   generator_step_2h: "Wähle ein Desaster"
   generator_step_2p: "Keine Sorge, es ist ja nur ein Poster..."
   generator_lightning: "Blitz"
