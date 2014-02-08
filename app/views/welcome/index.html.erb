@@ -53,6 +53,11 @@
 	<ul id="carousel" class="owl-carousel">
 
 		<% if @posters.length > 0 %>
+            <%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters.last} %>
+        <% end %>
+        
+        
+        <% if @posters.length > 0 %>
 				<%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters[0]} %>
 		<% end %>
 
@@ -69,6 +74,10 @@
 				<%= render :partial => 'posters/gallery_template', :locals => {:poster => poster} %>
 				<% end %>
 		<% end %>
+
+		<% if @posters.length > 0 %>
+            <%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters.first} %>
+        <% end %>
 
 	</ul>
 </div>

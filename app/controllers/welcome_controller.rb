@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
   def index
     @user = User.new
     @site = Site.new
-    @posters = Poster.order('created_at DESC').all   
+    @posters = Poster.order('id DESC').all   
   end
   
   def set_locale

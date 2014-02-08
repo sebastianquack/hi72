@@ -97,6 +97,20 @@ function stop_webcam() {
     }
 }
 
+var posterCreated = false;
+
+// updates the hash depending on which poster is in the center
+function updatePosterHash() {
+    index = $('div.owl-item.active').index() + 1;
+    console.log(posterCreated);
+    if(index == 2 && posterCreated == false) { // poster generator
+        window.location.hash = '';
+    } else {        
+        posterId = $('div.owl-item:eq(' + index + ') li').data('poster-id');
+        window.location.hash = '#poster/' + posterId;
+    }
+}
+
 function init_poster_generator() {
 
     var step = 1;
@@ -405,12 +419,15 @@ function init_poster_generator() {
 
 			// dump new item into placeholder if it's there
 			if($('#mainframe').length > 0) {
-				$('#mainframe').replaceWith(data);				
+				$('#mainframe').parent().replaceWith(data);				
+                posterCreated = true;
+                console.log('foo' + posterCreated);
 			} else { // add in second place and go there
 				owl.addItem(data, 1);
-				owl.jumpTo(0)  	
+				owl.jumpTo(0);
 			}
 
+            updatePosterHash();  	
             video.pause();
 			$('#posters').show();
 	 		$('#generator').hide();
@@ -445,10 +462,11 @@ $(document).ready(function() {
     	itemsDesktop : [1200,2], 
       	itemsDesktopSmall : [900,1],
       	itemsTablet: [600,1],
-      	itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option		
+      	itemsMobile : false, // itemsMobile disabled - inherit from itemsTablet option		
+        addClassActive : true
 	});
 	owl = $("#carousel").data('owlCarousel');
-		
+           	        
 	$('.navigation li a').click(function(event) {
 		if($('#front-cover').css('display') == 'block') {
 			$('#front-cover').fadeOut(800);
@@ -473,6 +491,7 @@ $(document).ready(function() {
 		$('#posters').show();
 		$('#generator').hide();
 		$('.prev, .next').show();
+        updatePosterHash();
 	});
 
 	$('.generator-link').click(function(event) {	
@@ -486,6 +505,7 @@ $(document).ready(function() {
 		$('.prev, .next').hide();				
 		$('.navigation li a').removeClass('active');
 		$('nav li a.generator-link').addClass('active');
+        window.location.hash = '';
 	});
 	
 	$('.front-link').click(function() {
@@ -493,6 +513,7 @@ $(document).ready(function() {
 		$('#posters').hide();
 		$('#content').hide();
 		$('.navigation li a').removeClass('active');
+        window.location.hash = '';
 	});
 
 	$('a').smoothScroll({
@@ -501,12 +522,14 @@ $(document).ready(function() {
 
 	$('.prev').click(function(event) {
 		event.preventDefault();
-		owl.prev()   // Go to previous slide	
+		owl.prev();   // Go to previous slide	
+        updatePosterHash();
 	});
 	
 	$('.next').click(function(event) {
 		event.preventDefault();
-		owl.next()   // Go to next slide
+		owl.next();   // Go to next slide
+        updatePosterHash();
 	});
 	
     $('#new_user').on('ajax:success', function(xhr, data, status) {
@@ -520,7 +543,32 @@ $(document).ready(function() {
     });
     
     
-
+    // move owl to requested poster        
+    // check if user wants a poster
+    if(window.location.hash.indexOf('#poster/') == 0) { 
+        // get the poster id from the hash
+        posterId = window.location.hash.substring('#poster/'.length); 
+        
+        // get index for poster
+        index = -1;
+        li = $('li.item.poster[data-poster-id="' + posterId + '"]');
+        if(li.length >= 1) {
+            index = li.parent().index();
+        }
+        // jump to that index
+        if(index >= 0) {
+            owl.jumpTo(index - 1);        
+            
+            // show gallery
+    		$('#front-cover').hide();
+    		$('#posters').show();
+    		$('#content').show();
+    		$('li a.gallery-link').addClass('active');
+        }
+    } else {
+        owl.jumpTo(1);        
+    }
+    
 });
 
 $(window).resize(positionOwlItem);
