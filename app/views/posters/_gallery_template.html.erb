@@ -1,18 +1,5 @@
-<li class="item poster">
-	
-	
-	
+<li class="item poster" data-poster-id="<%= poster.id %>">
+		
 	<%= image_tag poster.image.url(:original), :class => "poster-image" %><br>
-
-<!--	
-	<a href="#" 
-	  onclick="window.open(
-	      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('<%= absolute_attachment_url(poster.image) %>'), 
-	      'facebook-share-dialog', 
-	      'width=626,height=436'); 
-	    return false;">
-	    <img src="/assets/facebook.png"  width="24" height="24">
-	</a>
-	<a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= absolute_attachment_url(poster.image) %>" data-lang="en" data-related="anywhereTheJavascriptAPI" data-count="none">Tweet</a>-->
 
 </li>

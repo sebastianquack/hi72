@@ -21,6 +21,12 @@
 	<div class="slide">
 		<a href="#" class="prev"><</a>
 		<a href="#" class="next">></a>
+		<div class="sharing-menu">
+            <span>Share This Poster!</span>
+            <a href="#" id="share-link">Link</a>
+            <a href="#" id="share-twitter">Twitter</a>
+            <a href="#" id="share-facebook">Facebook</a>
+        </div>
 	</div>
 </div>
 
@@ -53,6 +59,11 @@
 	<ul id="carousel" class="owl-carousel">
 
 		<% if @posters.length > 0 %>
+            <%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters.last} %>
+        <% end %>
+        
+        
+        <% if @posters.length > 0 %>
 				<%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters[0]} %>
 		<% end %>
 
@@ -69,6 +80,10 @@
 				<%= render :partial => 'posters/gallery_template', :locals => {:poster => poster} %>
 				<% end %>
 		<% end %>
+
+		<% if @posters.length > 0 %>
+            <%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters.first} %>
+        <% end %>
 
 	</ul>
 </div>

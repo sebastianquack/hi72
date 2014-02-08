@@ -197,26 +197,61 @@ ul.navigation li {
 	z-index: 1;
 }
 
+.nav-bg .slide {
+	position: relative;
+}
+	
 .nav-bg .slide a {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	font-size: 22px;
 	color: #f0f;
-	margin-top: 50px;
-}
-
-.nav-bg .prev {
-	float: left;
-}
-
-.nav-bg .next {
-	float: right;
+	position: absolute;
+	top: 50px;
 }
 
 a.active {
     pointer-events: none;
 	color: #000;
 	cursor: default;
+}
+
+.nav-bg .prev {
+	left: 0px;
+}
+
+.nav-bg .next {
+	right: 0px;;
+}
+
+.nav-bg .slide .sharing-menu {
+	width: 400px;
+	position: relative;
+	top: 63px;
+	margin-left: auto;
+	margin-right: auto;
+	display: none;
+}
+
+.nav-bg .slide .sharing-menu span, .nav-bg .slide .sharing-menu a {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	font-size: 13px;
+	line-height: 20px;	
+	text-transform: uppercase;
+	top: 0px;
+	position: relative;
+	vertical-align: middle;
+}
+
+.nav-bg .slide .sharing-menu span {
+	color: #000;
+	float: left;
+}
+
+.nav-bg .slide .sharing-menu a {
+	float: right;
+	margin-left: 20px;
 }
 
 /**** FRONT PAGE ****/
