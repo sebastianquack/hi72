@@ -393,7 +393,7 @@ function init_poster_generator() {
 	    // Create new form data
 	    var fd = new FormData();
 	    // Append our Canvas image file to the form data
-	    fd.append("image", file);
+	    fd.append("image", file, "poster.png");
 	    // And send it
 	    $.ajax({
 	        url: "/poster_submit",
