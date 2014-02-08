@@ -119,6 +119,9 @@ function updatePosterHash() {
         // Todo update sharing links here
         poster_url = window.location.href;
         image_url = 'http://' + window.location.host + $('div.owl-item.active:eq(1) li img').attr('src');
+        if($('div.owl-item.active').length == 2) { // small mode
+            image_url = 'http://' + window.location.host + $('div.owl-item.active:eq(0) li img').attr('src');
+        }
         console.log(image_url);
 
         $('#share-link').attr('href', poster_url);
