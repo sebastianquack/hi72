@@ -105,9 +105,37 @@ function updatePosterHash() {
     console.log(posterCreated);
     if(index == 2 && posterCreated == false) { // poster generator
         window.location.hash = '';
+        $('.sharing-menu').hide();
     } else {        
         posterId = $('div.owl-item:eq(' + index + ') li').data('poster-id');
         window.location.hash = '#poster/' + posterId;
+        $('.sharing-menu').show();
+        
+        // Todo update sharing links here
+        poster_url = window.location.href;
+        image_url = window.location.host + $('div.owl-item.active:eq(1) li img').attr('src');
+        console.log(image_url);
+
+        $('#share-link').attr('href', poster_url);
+        $('#share-link').off('click');
+        
+        $('#share-facebook').off('click');
+        $('#share-facebook').on('click', function() {
+           
+      	  window.open(
+      	      'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(poster_url) + '&p[images][0]=' + encodeURIComponent(image_url), 
+      	      'facebook-share-dialog', 
+      	      'width=626,height=436'); 
+        });
+
+        $('#share-twitter').off('click');
+        $('#share-twitter').on('click', function() {
+           
+      	  window.open(
+      	      'http://twitter.com/share?text='+encodeURIComponent('I made a poster for 72 Hour Interactions! Check it out here: ')+'&url='+encodeURIComponent(poster_url), 
+      	      'twitter-share-dialog', 
+      	      'width=626,height=436');            
+        });
     }
 }
 
@@ -417,12 +445,12 @@ function init_poster_generator() {
 	        contentType: false,
 	     }).done(function(data) {
 
-			// dump new item into placeholder if it's there
+			// dump new item into generator's place if it's there
 			if($('#mainframe').length > 0) {
 				$('#mainframe').parent().replaceWith(data);				
                 posterCreated = true;
                 console.log('foo' + posterCreated);
-			} else { // add in second place and go there
+			} else { // if not add it in first place and move caroussel
 				owl.addItem(data, 1);
 				owl.jumpTo(0);
 			}
@@ -558,6 +586,7 @@ $(document).ready(function() {
         // jump to that index
         if(index >= 0) {
             owl.jumpTo(index - 1);        
+            updatePosterHash();
             
             // show gallery
     		$('#front-cover').hide();
