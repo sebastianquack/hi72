@@ -126,13 +126,45 @@ function updatePosterHash() {
         
         $('#share-facebook').off('click');
         $('#share-facebook').on('click', function(event) {
+            
+            
+            
            
           event.preventDefault();
+          
+          
+          /*
       	  window.open(
       	      
 'https://www.facebook.com/sharer/sharer.php?s=100&p[url]='+encodeURIComponent(poster_url)+'&p[images][0]='+encodeURIComponent(image_url)+'&p[summary]='+encodeURIComponent(I18n.t("social_media_prompt")), 
       	      'facebook-share-dialog', 
       	      'width=626,height=436'); 
+          
+         */
+         
+          FB.ui(
+               {
+                method: 'feed',
+                name: '72 HOUR INTERACTIONS',
+                caption: 'A World Championship of Gameful Architecture',
+                description: (
+                   I18n.t("social_media_prompt")
+                ),
+                link: poster_url,
+                picture: image_url
+               },
+               function(response) {
+                 if (response && response.post_id) {
+                   console.log('Post was published.');
+                 } else {
+                   console.log('Post was not published.');
+                 }
+               }
+             );
+          
+          
+          
+          
         });
 
         $('#share-twitter').off('click');
