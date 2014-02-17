@@ -124,6 +124,7 @@
 			
 			<%= t :section_site_content1_html %>
 			
+            <!--
             <%= form_for(@site, :html => {:class => "border-bottom"}, :remote=>true, 'data-type' => 'json') do |f| %>
 
 				<label for="site_description"><%= t :section_site_label_place %></label>
@@ -142,6 +143,7 @@
                 
                 <label><%= t :section_site_notice_email_html %></label>
             <% end %>
+            -->
             			
 			<%= t :section_site_content2_html %>
 			
@@ -151,6 +153,12 @@
 			<h3><%= t :section_partners_headline %></h3>
 			<%= t :section_partners_content_html %>
 	</section>
+
+	<section id="contact">
+			<h3><%= t :section_contact_headline %></h3>
+			<%= t :section_contact_content_html %>
+	</section>
+
 	
 	<div style="clear:both"></div>
 </div>
