@@ -1,0 +1,98 @@
+<%= render 'navigation' %>
+
+<div id="generator">
+		<%= render :partial => 'posters/generator' %>	
+</div>
+
+<div id="gallery">
+  
+<div class="nav-bg">
+	<div class="slide">
+		<a href="#" class="prev"><</a>
+		<a href="#" class="next">></a>
+		<div class="sharing-menu">
+            <span>Share This Poster!</span>
+            <a href="#" id="share-link">Link</a>
+            <a href="#" id="share-twitter">Twitter</a>
+            <a href="#" id="share-facebook">Facebook</a>
+        </div>
+	</div>
+</div>
+
+  <%= render :partial => 'posters/gallery' %>	
+
+	<div class="credits-container">
+		<div class="credits left">
+			<%= t :subtitle_left_html %>
+		</div>
+		<div class="credits right">
+			<%= t :subtitle_right_html %>
+		</div>
+	</div>
+</div>
+
+<div id="content">
+
+	<section id="about">
+
+			<h3><%= t :section_about_headline %></h3>
+			<%= t :section_about_content_html %>
+
+	</section>
+
+	<section id="championship">
+			<h3><%= t :section_championship_headline %></h3>
+			<%= t :section_championship_content_html %>
+
+            <%= form_for(@user, :html => {:class => "border-top"}, :remote=>true, 'data-type' => 'json') do |f| %>
+				<label for="user_email"><%= t :section_championship_label_html %></label>
+                <%= f.text_field :email, type: "email", required: "required" %>
+				<%= f.submit t(:form_submit) %>
+            <% end %>
+            
+	</section>
+
+	<section id="suggest">
+
+			<h3><%= t :section_site_headline %></h3>
+			
+			<%= t :section_site_content1_html %>
+			
+            <!--
+            <%= form_for(@site, :html => {:class => "border-bottom"}, :remote=>true, 'data-type' => 'json') do |f| %>
+
+				<label for="site_description"><%= t :section_site_label_place %></label>
+                <%= f.text_area :description, required: "required" %>
+
+				<label for="site_reason"><%= t :section_site_label_why %></label>
+                <%= f.text_area :reason, required: "required" %>
+
+				<label for="site_name"><%= t :section_site_label_name %></label>
+                <%= f.text_field :name, required: "required" %>
+                
+				<label for="site_email"><%= t :section_site_label_email %></label>
+                <%= f.text_field :email, type: "email", required: "required" %>
+
+				<%= f.submit t(:form_submit) %>
+                
+                <label><%= t :section_site_notice_email_html %></label>
+            <% end %>
+            -->
+            			
+			<%= t :section_site_content2_html %>
+			
+	</section>	
+	
+	<section id="partners">
+			<h3><%= t :section_partners_headline %></h3>
+			<%= render 'welcome/partners' %>
+	</section>
+
+	<section id="contact">
+			<h3><%= t :section_contact_headline %></h3>
+			<%= t :section_contact_content_html %>
+	</section>
+
+	
+	<div style="clear:both"></div>
+</div>

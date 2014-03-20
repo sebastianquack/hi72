@@ -592,28 +592,34 @@ $(document).ready(function() {
 	});
 	owl = $("#carousel").data('owlCarousel');
            	        
-	$('.navigation li a').click(function(event) {
-		if($('#front-cover').css('display') == 'block') {
+	$('.navigation li a').click(function(event) {		
+    
+    /*
+    if($('#front-cover').css('display') == 'block') {
 			$('#front-cover').fadeOut(800);
 			$('#content').show();
 		}
-		
+    */
+    $('#content').show();
+    
 		$('.navigation li a').removeClass('active');
 		$(event.target).addClass('active');
 		
 		$('.prev, .next').hide();
 	});
-			
+	
+  /*		
 	$('#front-cover').click(function() {
 		$('#front-cover').fadeOut(800);
 		$('#posters').show();
 		$('#content').show();
 		$('li a.gallery-link').addClass('active');
 	});
+  */
 
 	$('.gallery-link').click(function(event) {
 		event.preventDefault();
-		$('#posters').show();
+		$('#gallery').show();
 		$('#generator').hide();
 		$('.prev, .next').show();
         updatePosterHash();
@@ -623,7 +629,8 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		if($('#generator').css('display') == 'none') {
-            $('#posters').hide();
+            $('#content').hide();
+            $('#gallery').hide();
     		$('#generator').show();
 			init_poster_generator();
 		}
@@ -633,18 +640,33 @@ $(document).ready(function() {
         window.location.hash = '';
         $('.sharing-menu').hide();
 	});
-	
+
+  /*
 	$('.front-link').click(function() {
 		$('#front-cover').fadeIn();
 		$('#posters').hide();
 		$('#content').hide();
 		$('.navigation li a').removeClass('active');
         window.location.hash = '';
+    $(document).scrollTop(0);    
 	});
+  */
 
 	$('a').smoothScroll({
-		offset: -100
+		offset: -50
 	});
+
+  if(window.location.hash.indexOf('#about') == 0) {
+    $('a.about-link')[0].click();
+  } 
+  if(window.location.hash.indexOf('#partners') == 0) {
+    $('a.partners-link')[0].click();
+  } 
+  if(window.location.hash.indexOf('#gallery') == 0) {
+    $('a.gallery-link')[0].click();
+  } 
+  
+
 
 	$('.prev').click(function(event) {
 		event.preventDefault();
@@ -692,9 +714,10 @@ $(document).ready(function() {
             updatePosterHash();
             
             // show gallery
-    		$('#front-cover').hide();
-    		$('#posters').show();
+    		//$('#front-cover').hide();
+    		$('#gallery').show();
     		$('#content').show();
+        $('.prev, .next').show();
     		$('li a.gallery-link').addClass('active');
         }
     } else {

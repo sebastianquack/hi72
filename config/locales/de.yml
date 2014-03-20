@@ -23,6 +23,7 @@ de:
   short_description: "Eine Weltmeisterschaft für Spielbare Architektur, diesen Juli im Ruhrgebiet. Besuche http://72hourinteractions.com für alle Infos, und um dein eigenes Poster zu kreieren!"
   social_media_prompt: "Mach' dein eigenes Poster für 72 Hour Interactions!"
   
+  menu_open_call: "Jetzt bewerben!"
   menu_about: "Über das Projekt"
   menu_gallery: "Poster-Gallerie"
   menu_generator: "Poster-Generator"
@@ -31,10 +32,10 @@ de:
   menu_suggest: "Der Austragungsort"
   menu_partners: "Die Partner"
 
-  subtitle_left_html: "Urbane Künste Ruhr präsentiert<br>Eine Weltmeisterschaft für spielbare Architektur // JULI 2014 im Ruhrtal"
+  subtitle_left_html: "Eine Weltmeisterschaft für spielbare Architektur<br>23.-27. JULI 2014 in Witten"
   subtitle_right_html: ""
 
-  poster_claim_html: "Rette Deine Stadt<br> vor urbaner Langeweile:<br>Schaffe ein Desaster und<br> tritt ins Bild!"
+  poster_claim_html: "Schaffe ein Desaster und<br> tritt ins Bild!"
   poster_link: "Mach' Dein eigenes Poster!"
 
   section_about_headline: "Über das Projekt"
@@ -55,7 +56,6 @@ de:
   section_site_content2_html: "<p>Wir haben spannende Vorschläge aus allen 5 Städten erhalten. Vielen Dank für die Beteiligung! Im Februar ist die Jury zusammengekommen und hat die Vorschläge und alle Recherche-Ergebnisse ausgewertet. In einem sehr knappen Ergebnis hat die Stadt Witten das Rennen gemacht und wird Austragungsort der Weltmeisterschaft. Der Jury gehörten an: Urbane Künste Ruhr, 72 HOUR URBAN ACTION, Invisible Playground, sowie die Architektin Nathalie Pozzie, der Spiele-Entwickler Eric Zimmerman und der Urbanist Philipp Misselwitz.</p><p>Gegenwärtig suchen wir in Witten den passenden Ort für das Camp, sowie eine Reihe von Mikro-Orten für die Missionen. Mikro-Orte, die groß genug sind, damit eine Gemeinschaft sich an ihnen erfreuen kann, die aber zu klein sind, um offiziell renoviert zu werden. Es kann sich um den ungenutzten Zwischenraum zwischen zwei Gebäuden handeln, oder um die Straßenecke, an der nie etwas wächst, den leeren Raum hinter der Bushaltestelle, oder den verlassenen Hof neben dem Supermarkt.</p>"
   
   section_partners_headline: "Die Partner"
-  section_partners_content_html: '<p><b>72 Hour Urban Action</b> ist der weltweit erste Wettbewerb für Echt-Zeit-Architektur, in dem 10 internationale Teams in 3 Tagen und 3 Nächten Projekte im öffentlichen Raum umsetzen und dabei auf lokale Bedürfnisse reagieren. Die Teams entwerfen, bauen, schlafen und feiern vor Ort, um Interventionen im öffentlichen Raum mit extremem Zeitdruck, knappem Budget und auf kleinstem Raum zu realisieren. 72 Hour Urban Action lädt Professionelle und Anwohner gleichermaßen dazu ein, aktive Agenten eines Wandels von Unten zu werden und eine bleibende Veränderung in der urbanen Landschaft zu bewirken.</p><p>Der erste 72 Hour Urban Action Wettbewerb fand im September 2010 als Teil der Bat-Yam Biennale für Landscape Urbanism statt. Die Bat-Yam Biennale ist eine einzigartige zivilgesellschaftliche Veranstaltung, die radikale Aktivitäten im öffentlichen Raum in Zusammenarbeit mit der lokalen Verwaltung ermöglicht.</p><p>72 HUA sucht nach Wegen, Experimente im öffentlichen Raum zu ermöglichen, alternative Teilnehmer in den kreativen Prozess der Stadtentwicklung einzubeziehen und die Lücke zwischen Planung und Bau zu schließen.</p><p><img src="assets/urban-action-logo-lo-res.jpg" width="150" alt="Urban Action Logo Lo Res"></p><p>Um mehr über 72 Hour Urban Action zu erfahren, <a href="http://72hoururbanaction.com" target="_blank">clicke hier</a>.</p><p><b>Invisible Playground</b> ist ein Kollektiv aus Künstlern, Spiele-Machern und Spiel-Forschern. 2009 formiert, entwickelt Invisible Playground orts-spezifische Arbeiten in sehr verschiedenen Größen und Formaten, verbunden durch das Interesse, durch Spiel zu einem neuen Verständnis von Stadt und urbaner Gesellschaft beizutragen. Mit Verfahren aus experimentellem Theater und Performance-Kunst, Pop-Fiktionen, Sport, Brett- und Computerspielen, schafft die Gruppe für spielende Teilnehmer Zugänge zu den unsichtbaren Spielplätzen, die wir jeden Tag durchlaufen, ohne sie zu bemerken. Neben Spielen, Workshops und Playtesting-Events kuratiert Invisible Playground das Playpublik Festival. Invisible Playground arbeitet international mit Theatern, Museen und Festivals zusammen.</p><p>Um mehr über Invisible Playground zu erfahren, <a href="http://invisibleplayground.com" target="_blank">clicke hier</a>.</p><p><b>Urbane Künste Ruhr</b> nimmt die einzigartige urbane Landschaft des Ruhrgebiets zum Anlass, gemeinsam mit Künstlern, Netzwerken und Kulturinstitutionen nach dem Kern des Urbanen zu suchen. Unter der künstlerischen Leitung von Katja Aßmann entwickelt und realisiert Urbane Künste Ruhr Projekte, die den Begriff „Kunst im öffentlichen Raum“ als tiefgreifende Gestaltung von Stadt neu definieren – immer vor Ort und gemeinsam mit den Menschen, die hier leben. Urbane Künste Ruhr wagt einen neuen Blick auf das Ruhrgebiet, auf Stadt an sich und auf die Möglichkeiten der Kunst.</p><p><img src="assets/logo-ukr.png" width="150" alt="Logo UKR"></p><p>Um mehr über Urbane Künste Ruhr zu erfahren, <a href="http://urbanekuensteruhr.de" target="_blank">clicke hier</a>.</p>'
 
   section_contact_headline: "Kontakt"
   section_contact_content_html: "<p>Bei Fragen wenden Sie sich bitte an <a href='mailo:info@72hourinteractions.com'>info@72hourinteractions.com</a>.</p>"

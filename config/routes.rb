@@ -12,6 +12,9 @@ Hi72::Application.routes.draw do
 
   post 'poster_submit' => 'posters#submit'
 
+  get 'apply' => 'welcome#open_call'
+  get 'info' => 'welcome#project_info'
+
   root 'welcome#index'
 
   # Example of regular route:

@@ -131,10 +131,15 @@ section, section form.border-top {
 
 #navigation {
 	position:fixed;
+	background-color: #fff;
 	top: 0px;
 	z-index:3;
 	width:100%;
 	padding-top:5px;
+}
+
+#navigation.transparent {
+	background-color: transparent;
 }
 
 .slide {
@@ -192,7 +197,7 @@ ul.navigation li {
 	height: 90px;
 	background-color: #fff;
 	width: 100%;
-	position: fixed;
+	/* position: fixed; */
 	top: 0;
 	z-index: 1;
 }
@@ -257,7 +262,10 @@ a.active {
 /**** FRONT PAGE ****/
 
 #front-cover {
-    background-image: url("/assets/Ruhrtal_bei_nebel_-21.jpg");
+    /*background-image: url("/assets/Ruhrtal_bei_nebel_-21.jpg");
+		background-image: url("/assets/7794708534_37e6d12e0b_h.jpg");*/
+		background-image: url("/assets/7857038306_37e0738741_o.jpg");
+
 	
     background-attachment:fixed;
     background-size: cover;
@@ -268,7 +276,7 @@ a.active {
 	top: 0;
 
 	z-index: 2;
-	cursor:pointer;
+	/* cursor:pointer; */
 
 	box-shadow: inset 0px 5px 600px #222;
 }
@@ -282,7 +290,7 @@ a.active {
 	box-shadow: 0px 5px 200px #000;
 }
 
-#front-cover img {
+#front-cover img.center, #front-cover iframe.center {
 	display:block;
 	margin: 0 auto;
 	margin-top: 110px;
@@ -293,14 +301,20 @@ a.active {
 
 .logo-text {
 	width: 900px;
+	height: 100px;
 	margin: 0 auto;
-	font-family: Steelfish;
-	font-size: 88px;
-	letter-spacing: 8px;
-	text-align: center;
 	z-index: 4;
 	position: relative;
-	top: -10px;
+	text-align: center;
+	top: -20px;
+}
+
+.logo-text span {
+	font-family: Steelfish;
+	color: #fff;
+	font-size: 88px;
+	letter-spacing: 8px;
+	text-shadow: 1px 1px #222;
 }
 
 #canvas-outline {
@@ -315,17 +329,25 @@ a.active {
 
 /*** credits ****/
 
-#front-cover .credits-container {
-}
-
 .credits-container {
 	width: 1024px;
 	margin: 0 auto;
 	position: relative;
 }
 
+.credits-container .logo-container {
+	width: 450px;
+	display: block;
+	margin: 0 auto;
+}
+
+.logo-container img {
+	vertical-align:middle;
+}
+
 .credits {
 	font-family: Steelfish;
+	text-shadow: 1px 1px #222;
 	font-size: 32px;
 	line-height: 40px;
 	letter-spacing: 0.2px;
@@ -346,6 +368,7 @@ a.active {
 
 .credits.left {
 	left: 0px;
+	letter-spacing: 1px;
 	text-align: center;
 }
 
@@ -523,9 +546,9 @@ video {
 
 /**** POSTERS ****/
 
-#posters {
-	margin-top: 90px;
-	display: none;
+#gallery {
+	/*margin-top: 90px;*/
+	/* display: none;*/
 }
 
 #carousel {
@@ -537,6 +560,21 @@ video {
   width: 100%;
   height: auto;
   text-align:center;
+}
+
+#gallery .credits-container {
+	padding-top: 6px;
+	height: 100px;
+	z-index: 0;
+}
+
+#gallery .credits {
+	color: #333;
+	text-shadow: none;
+}
+
+.prev, .next {
+	display:none;
 }
 
 /** regular frames **/
@@ -581,18 +619,9 @@ h1 em {
 /**** content SECTIONS ****/
 
 #content {
-	display: none;
+	display: block;
 	margin-bottom: 20px;
-}
-
-#content .credits-container {
-	padding-top: 6px;
-	height: 100px;
-	z-index: 0;
-}
-
-#content .credits {
-	color: #333;
+	/*margin-top: 100px;*/
 }
 
 section {
@@ -631,6 +660,10 @@ p {
 
 section h3 {
 	float: left;
+}
+
+#open_call_info {
+	margin-top: 50px;
 }
 
 

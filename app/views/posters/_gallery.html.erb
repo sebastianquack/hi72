@@ -1,0 +1,31 @@
+
+	<ul id="carousel" class="owl-carousel">
+
+		<% if @posters.length > 0 %>
+            <%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters.last} %>
+        <% end %>
+        
+        
+        <% if @posters.length > 0 %>
+				<%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters[0]} %>
+		<% end %>
+
+		<li class="item">
+			<div id="mainframe">				
+				<br><br><br>
+				<a href="#" class="generator-link"><%= t :poster_claim_html %></a><br>
+				<a href="#" class="generator-link pink"><%= t :poster_link %></a>
+			</div>
+		</li>
+
+		<% if @posters.length > 1	%>			
+			<% @posters[1..(@posters.length-1)].each do |poster| %>
+				<%= render :partial => 'posters/gallery_template', :locals => {:poster => poster} %>
+				<% end %>
+		<% end %>
+
+		<% if @posters.length > 0 %>
+            <%= render :partial => 'posters/gallery_template', :locals => {:poster => @posters.first} %>
+        <% end %>
+
+	</ul>

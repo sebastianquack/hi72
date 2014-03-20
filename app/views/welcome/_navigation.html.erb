@@ -1,0 +1,33 @@
+<nav id="navigation" <% if @transparent %> class="transparent" <% end %>>
+	<div class="slide">
+		<a href="<%= root_path %>"><img id="small-logo" src="assets/logo_small3.png" class="front-link"></a>
+		<ul class="navigation">
+      <li>
+        <% if request.path.include?('apply') %>  
+          <%= link_to t(:menu_open_call), url_for(:controller => 'welcome', :action => 'open_call'), :class => "active" %>
+        <% else %>
+          <%= link_to t(:menu_open_call), url_for(:controller => 'welcome', :action => 'open_call') %>
+        <% end %>
+      </li>
+      
+      <% if request.path.include?('info') %>
+        <li><a href="#about" class="about-link"><%= t :menu_about %></a></li>
+        <li><a href="#partners" class="partners-link"><%= t :menu_partners %></a></li>
+        <li><a href="#gallery" class="gallery-link"><%= t :menu_gallery %></a></li>
+        <!--li><a href="#generator" class="generator-link"><%= t :menu_generator %></a></li-->
+        <!--li><a href="#championship"><%= t :menu_championship %></a></li-->
+        <!--li><a href="#suggest"><%= t :menu_suggest %></a></li-->
+      <% else %>
+        <li><%= link_to t(:menu_about), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'about') %></li>
+        <li><%= link_to t(:menu_partners), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'partners') %></li>
+        <li><%= link_to t(:menu_gallery), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'gallery') %></li>          
+      <% end %>
+      
+		</ul>
+		<div id="language">
+			
+			<a hreflang="en" href="/?locale=en" <% if I18n.locale == :en %>class="active"<% end %>>EN</a><br>
+			<a hreflang="de" href="/?locale=de" <% if I18n.locale == :de %>class="active"<% end %>>DE</a>
+		</div>
+	</div>
+</nav>
