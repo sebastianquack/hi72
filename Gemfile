@@ -53,4 +53,4 @@ group :production do
 end
 
 gem "i18n-js"
-
+gem "geocoder"

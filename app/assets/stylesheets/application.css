@@ -336,9 +336,10 @@ a.active {
 }
 
 .credits-container .logo-container {
-	width: 450px;
+	width: 470px;
 	display: block;
 	margin: 0 auto;
+	margin-top: 10px;
 }
 
 .logo-container img {

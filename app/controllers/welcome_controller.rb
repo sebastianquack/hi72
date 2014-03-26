@@ -17,7 +17,14 @@ class WelcomeController < ApplicationController
 
   
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    if params[:locale]
+      I18n.locale = params[:locale] 
+    elsif request.location.country_code == "DE"
+      I18n.locale = :de
+    else
+      I18n.locale = I18n.default_locale
+    end
+    
   end
   
 end

@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
 
   before_action :set_locale
-
   before_filter :export_i18n_messages
 
   def export_i18n_messages
