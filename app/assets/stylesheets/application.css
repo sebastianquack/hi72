@@ -646,6 +646,14 @@ section p {
 	line-height: 20px;
 }
 
+p {
+	color: #333;
+}
+
+section h3 {
+	float: left;
+}
+
 section p, form {
 	float: right;
 	width: 66%;	
@@ -654,16 +662,17 @@ section p, form {
 	margin-bottom: 1.5em;
 }
 
-p {
+section h4 {
+	float: right;
+	width: 66%;
+	font-size: 14px;
+	font-weight: bold;
+	letter-spacing: 120%;
+	margin-bottom: 1.5em;
 	color: #333;
 }
 
-
-section h3 {
-	float: left;
-}
-
-#open_call_info {
+#open_call_video {
 	margin-top: 50px;
 }
 
