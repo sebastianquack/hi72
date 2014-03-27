@@ -676,6 +676,15 @@ section h4 {
 	margin-top: 50px;
 }
 
+#form_response {
+	display:none;
+	margin-bottom: 0;
+}
+
+#form_response p {
+	margin-bottom: 0;
+}
+
 
 /**** FORMS ****/
 

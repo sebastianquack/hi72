@@ -666,7 +666,9 @@ $(document).ready(function() {
     $('a.gallery-link')[0].click();
   } 
   
-
+  if(window.location.hash.indexOf('#submission_complete') == 0) {
+    alert(I18n.t("open_call_submission_response"));
+  }
 
 	$('.prev').click(function(event) {
 		event.preventDefault();
@@ -721,10 +723,12 @@ $(document).ready(function() {
     		$('li a.gallery-link').addClass('active');
         }
     } else {
-        if($('div.owl-item.active').length == 2) { // small mode
+        if($('div.owl-item.active').length > 0) {
+          if($('div.owl-item.active').length == 2) { // small mode
             owl.jumpTo(2);                    
-        } else {
+          } else {
             owl.jumpTo(1);                    
+          }
         }
     }
     
