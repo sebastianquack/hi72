@@ -64,7 +64,7 @@ de:
   section_partners_headline: "Die Partner"
 
   section_contact_headline: "Kontakt"
-  section_contact_content_html: "<p>Bei Fragen wenden Sie sich bitte an <a href='mailo:info@72hourinteractions.com'>info@72hourinteractions.com</a>.</p>"
+  section_contact_content_html: "<p>Bei Fragen wende dich bitte an <a href='mailo:info@72hourinteractions.com'>info@72hourinteractions.com</a>.</p>"
 
   email_submit_success: "Vielen Dank! Ihre E-Mail-Adresse wurde gespeichert."
   email_submit_error: "Fehler beim Speichern der E-Mail-Adresse."
