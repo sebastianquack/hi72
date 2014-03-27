@@ -41,15 +41,9 @@
 	</section>
 
 	<section id="championship">
-			<h3><%= t :section_championship_headline %></h3>
-			<%= t :section_championship_content_html %>
-
-            <%= form_for(@user, :html => {:class => "border-top"}, :remote=>true, 'data-type' => 'json') do |f| %>
-				<label for="user_email"><%= t :section_championship_label_html %></label>
-                <%= f.text_field :email, type: "email", required: "required" %>
-				<%= f.submit t(:form_submit) %>
-            <% end %>
-            
+      
+      <%= render "championship_info" %>
+      
 	</section>
 
 	<section id="suggest">
