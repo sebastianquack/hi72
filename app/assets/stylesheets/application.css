@@ -168,7 +168,7 @@ ul.navigation li {
 	display:block;
 	float:left;
 
-	font-family: 'Roboto', sans-serif;
+	font-family: Roboto, sans-serif;
 	font-weight: 700;
 	font-size: 13px;
 	line-height: 20px;
@@ -181,9 +181,9 @@ ul.navigation li {
 	margin-right: 20px;
 }
 
-ul.navigation li a:hover, #language a:hover {
+/*ul.navigation li a:hover, #language a:hover {
 	color: #fff;
-}
+}*/
 
 
 #language {
