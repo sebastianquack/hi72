@@ -177,11 +177,14 @@ ul.navigation li {
 	z-index: 5;
 	text-transform: uppercase;
 	color: #f0f;
-}
 
-ul.navigation li {
 	margin-right: 20px;
 }
+
+ul.navigation li a:hover, #language a:hover {
+	color: #fff;
+}
+
 
 #language {
 	float:right;
@@ -262,10 +265,9 @@ a.active {
 /**** FRONT PAGE ****/
 
 #front-cover {
-    /*background-image: url("/assets/Ruhrtal_bei_nebel_-21.jpg");
-		background-image: url("/assets/7794708534_37e6d12e0b_h.jpg");*/
-		background-image: url("/assets/7857038306_37e0738741_o.jpg");
-
+    /*background-image: url("/assets/Ruhrtal_bei_nebel_-21.jpg");*/
+		background-image: url("/assets/7794708534_37e6d12e0b_h.jpg");
+		/*background-image: url("/assets/7857038306_37e0738741_o.jpg");*/
 	
     background-attachment:fixed;
     background-size: cover;
@@ -293,10 +295,10 @@ a.active {
 #front-cover img.center, #front-cover iframe.center {
 	display:block;
 	margin: 0 auto;
-	margin-top: 110px;
 	z-index: 4;
 	position: relative;
 	width: 650px;
+	margin-top: 70px;
 }
 
 .logo-text {
@@ -325,6 +327,41 @@ a.active {
 	left: 50%;
 	margin-left: -200px;
 	z-index: 3;
+}
+
+.apply-now {
+	z-index: 4;
+	position: relative;
+	margin-top: 5px;
+}
+
+.apply-now .left {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.apply-now .right {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.apply-now a {
+	font-family: Roboto;
+	color: #f0f;
+	font-size: 34px;
+	min-width: 300px;
+	display: block;
+	margin: 0 auto;
+	text-align:center;
+	position: relative;
+	top: -7px;
+	text-shadow: 1px 1px #222;
+}
+
+.apply-now a:hover {
+	color: #fff;
 }
 
 /*** credits ****/

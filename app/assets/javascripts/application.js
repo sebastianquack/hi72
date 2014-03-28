@@ -732,6 +732,11 @@ $(document).ready(function() {
         }
     }
     
+    if($(".apply-now a").length > 0) {
+          
+      
+    }
+    
 });
 
 $(window).resize(positionOwlItem);

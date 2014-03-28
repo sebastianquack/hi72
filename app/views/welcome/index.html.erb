@@ -5,17 +5,24 @@
 	<div id="shadow"></div>
 	
 	<!--div id="canvas-outline"></div-->
-
 	<!--img class="center" src="assets/logoschatten_neu.png"-->  
-  
+
   <iframe class="center" width="650" height="366" src="//www.youtube.com/embed/d82m2FsXbUo" frameborder="0" allowfullscreen></iframe>
   
   <div class="logo-text slide"><span>72 HOUR INTERACTIONS</span></div>
+
+  <div class="apply-now slide">
+  	<img src="assets/pfeilelinks.png" class="left">  
+    <%= link_to t(:apply_now_button), url_for(:controller => 'welcome', :action => 'open_call') %>
+    <img src="assets/pfeilerechts.png" class="right">  
+  </div>
+
 
 	<div class="credits-container">
 		<div class="credits left">
 			<%= t :subtitle_left_html %>
 		</div>	
+
     
     <div class="logo-container">
       <a href="http://72hoururbanaction.com" target="_blank"><img src="assets/ua_logo72_w.png" width="150" alt="Urban Action Logo Lo Res"></a>
