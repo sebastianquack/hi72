@@ -266,8 +266,11 @@ a.active {
 
 #front-cover {
     /*background-image: url("/assets/Ruhrtal_bei_nebel_-21.jpg");*/
-		background-image: url("/assets/7794708534_37e6d12e0b_h.jpg");
+		/* background-image: url("/assets/7794708534_37e6d12e0b_h.jpg");*/
 		/*background-image: url("/assets/7857038306_37e0738741_o.jpg");*/
+	
+		background-image: url("/assets/Handshake.jpg");
+	
 	
     background-attachment:fixed;
     background-size: cover;
