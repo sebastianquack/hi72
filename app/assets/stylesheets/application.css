@@ -298,7 +298,7 @@ a.active {
 #front-cover img.center, #front-cover iframe.center {
 	display:block;
 	margin: 0 auto;
-	z-index: 4;
+	z-index: 5;
 	position: relative;
 	width: 650px;
 	margin-top: 70px;
