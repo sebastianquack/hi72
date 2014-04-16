@@ -574,7 +574,63 @@ var positionOwlItem = function() {
 	}
 }
 
+function pad(n) {
+  if(n < 10) {
+    return "0" + n;
+  }
+  return n;
+}
+
+function updateCountdown() {
+    
+    var countdown_target = 1400457600; // May 19 00:00:00 UTC
+    var now = new Date();    
+    var offset = now.getTimezoneOffset();
+    var target_seconds = Math.floor(now.getTime() / 1000) + offset * 60;
+    var total_seconds_left = countdown_target - target_seconds;
+    if(total_seconds_left < 0) {
+      total_seconds_left = 0;
+    }
+
+    var days_left = Math.floor(total_seconds_left / 86400);
+    if(days_left < 10) {
+      days_left = "0" + days_left;
+    }
+    var hours_left = Math.floor(total_seconds_left / 3600) - days_left * 24;
+    var minutes_left = Math.floor(total_seconds_left / 60) - (days_left * 1440 + hours_left * 60);
+    var seconds_left = total_seconds_left - (days_left * 86400 + hours_left * 3600 + minutes_left * 60);
+    
+    $('div.apply-now a.countdown').html(pad(days_left) + ':' + pad(hours_left) + ':' + pad(minutes_left) + ':' + pad(seconds_left));
+}
+
+function toggleUpdateNowButton() {
+//  if($('div.apply-now a.text').is(":visible"))  {
+    $('div.apply-now a.text').hide();
+    $('div.apply-now a.countdown').show().css("display", "block");
+/*  } else {
+    $('div.apply-now a.countdown').hide();
+    $('div.apply-now a.text').show().css("display", "block");
+  }*/
+}
+
 $(document).ready(function() {
+
+  if($('div.apply-now').length > 0) {
+    setInterval(updateCountdown, 1000);
+    setTimeout(toggleUpdateNowButton, 3000);
+    $('div.apply-now a')
+      .hover(function() {
+        $('div.apply-now a.countdown').hide();
+        $('div.apply-now a.text').show().css("color", "#fff");      
+        $('div.apply-now a.text').show().css("display", "block");      
+      })
+      .mouseleave(function() {
+        $('div.apply-now a.text').hide();
+        $('div.apply-now a.text').css("color", "#f0f");      
+        $('div.apply-now a.countdown').show().css("color", "#f0f");      
+        $('div.apply-now a.countdown').show().css("display", "block");      
+      });
+  }
 
 	$("#carousel").owlCarousel({
 		//responsiveBaseWidth: "#carousel-width",

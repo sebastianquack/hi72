@@ -354,7 +354,7 @@ a.active {
 	font-family: Roboto;
 	color: #f0f;
 	font-size: 34px;
-	min-width: 300px;
+	min-width: 200px;
 	display: block;
 	margin: 0 auto;
 	text-align:center;
@@ -363,8 +363,14 @@ a.active {
 	text-shadow: 1px 1px #222;
 }
 
+/*
 .apply-now a:hover {
 	color: #fff;
+}
+*/
+
+.apply-now a.countdown {
+	display: none;
 }
 
 /*** credits ****/
