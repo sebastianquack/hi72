@@ -23,7 +23,7 @@ en:
   short_description: "A World Championship of Gameful Architecture, this July in Ruhr. Visit http://72hourinteractions.com for all infos and to create your own cool poster!"
   social_media_prompt: "Make your own Poster for 72 Hour Interactions!"
   
-  menu_open_call: "Apply now!"
+  menu_open_call: "The Open Call"
   menu_about: "About The Project"
   menu_gallery: "Poster Gallery"
   menu_generator: "Poster Generator"
@@ -41,7 +41,7 @@ en:
   apply_now_button: "Apply Now!"
 
   open_call_headline_0: "The Open Call Video"
-  open_call_headline_1: "Apply Now!"
+  open_call_headline_1: "Open Call Infos"
   open_call_headline_2: "The Form"
   open_call_headline_3: "FAQ"
   open_call_submission_response: "Thank you for your submission! If your're applying as a group, please fill out the form for the other group members as well." 

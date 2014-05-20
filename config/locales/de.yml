@@ -23,7 +23,7 @@ de:
   short_description: "Eine Weltmeisterschaft für Spielbare Architektur, diesen Juli im Ruhrgebiet. Besuche http://72hourinteractions.com für alle Infos, und um dein eigenes Poster zu kreieren!"
   social_media_prompt: "Mach' dein eigenes Poster für 72 Hour Interactions!"
   
-  menu_open_call: "Jetzt bewerben!"
+  menu_open_call: "Der Open Call"
   menu_about: "Über das Projekt"
   menu_gallery: "Poster-Gallerie"
   menu_generator: "Poster-Generator"
@@ -41,7 +41,7 @@ de:
   apply_now_button: "Jetzt bewerben!"
 
   open_call_headline_0: "Das Video zum Aufruf"
-  open_call_headline_1: "Bewirb' dich jetzt!"
+  open_call_headline_1: "Infos zum Aufruf"
   open_call_headline_2: "Das Formular"
   open_call_headline_3: "Häufige Fragen"
   open_call_submission_response: "Thank you for your submission! If your're applying as a group, please fill out the form for the other group members as well." 
