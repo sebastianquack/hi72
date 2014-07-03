@@ -23,6 +23,10 @@ en:
   short_description: "A World Championship of Gameful Architecture, this July in Ruhr. Visit http://72hourinteractions.com for all infos and to create your own cool poster!"
   social_media_prompt: "Make your own Poster for 72 Hour Interactions!"
   
+  menu_schedule: "Public Program"
+  menu_volunteers: "Become a Volunteer!"
+  menu_teams: "The Teams"
+  
   menu_open_call: "The Open Call"
   menu_about: "About The Project"
   menu_gallery: "Poster Gallery"

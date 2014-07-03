@@ -9,6 +9,15 @@ class WelcomeController < ApplicationController
   def open_call
   end
 
+  def schedule
+  end
+
+  def teams
+  end
+
+  def mitmachen
+  end
+
   def project_info
     @user = User.new
     @site = Site.new

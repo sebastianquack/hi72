@@ -2,25 +2,61 @@
 	<div class="slide">
 		<a href="<%= root_path %>"><img id="small-logo" src="assets/logo_small3.png" class="front-link"></a>
 		<ul class="navigation">
-      <li>
+      <!--li>
+          <%= link_to t(:menu_schedule), url_for(:controller => 'welcome', :action => 'schedule'), :class => (request.path.include?('schedule')? "active" : "inactive") %>
+        </li-->
+
+        <!--li>
+          <%= link_to t(:menu_teams), url_for(:controller => 'welcome', :action => 'teams'), :class => (request.path.include?('teams')? "active" : "inactive") %>
+        </li-->
+          
+              
+      <% if request.path.include?('info') %>
+        <li><a href="#about" class="about-link"><%= t :menu_about %></a></li>
+
+          <li>
+          <%= link_to t(:menu_volunteers), url_for(:controller => 'welcome', :action => 'mitmachen'), :class => (request.path.include?('mitmachen')? "active" : "inactive") %>
+        </li>
+
+        <br>
+        <li>
         <% if request.path.include?('apply') %>  
+
           <%= link_to t(:menu_open_call), url_for(:controller => 'welcome', :action => 'open_call'), :class => "active" %>
+          
         <% else %>
           <%= link_to t(:menu_open_call), url_for(:controller => 'welcome', :action => 'open_call') %>
         <% end %>
       </li>
-      
-      <% if request.path.include?('info') %>
-        <li><a href="#about" class="about-link"><%= t :menu_about %></a></li>
+
+
         <li><a href="#partners" class="partners-link"><%= t :menu_partners %></a></li>
         <li><a href="#gallery" class="gallery-link"><%= t :menu_gallery %></a></li>
         <!--li><a href="#generator" class="generator-link"><%= t :menu_generator %></a></li-->
         <!--li><a href="#championship"><%= t :menu_championship %></a></li-->
         <!--li><a href="#suggest"><%= t :menu_suggest %></a></li-->
       <% else %>
+      
         <li><%= link_to t(:menu_about), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'about') %></li>
-        <li><%= link_to t(:menu_partners), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'partners') %></li>
-        <li><%= link_to t(:menu_gallery), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'gallery') %></li>          
+        
+          <li>
+          <%= link_to t(:menu_volunteers), url_for(:controller => 'welcome', :action => 'mitmachen'), :class => (request.path.include?('mitmachen')? "active" : "inactive") %>
+        </li>
+        <br>
+        
+          <li>
+          <% if request.path.include?('apply') %>  
+
+            <%= link_to t(:menu_open_call), url_for(:controller => 'welcome', :action => 'open_call'), :class => "active" %>
+          
+          <% else %>
+            <%= link_to t(:menu_open_call), url_for(:controller => 'welcome', :action => 'open_call') %>
+          <% end %>
+        </li>
+        
+        
+        <li><%= link_to t(:menu_partners), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'partners') %></li-->
+        <li><%= link_to t(:menu_gallery), url_for(:controller => 'welcome', :action => 'project_info', :anchor => 'gallery') %></li-->          
       <% end %>
       
 		</ul>
