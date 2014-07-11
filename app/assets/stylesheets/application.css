@@ -697,16 +697,24 @@ p {
 	color: #333;
 }
 
-section h3 {
+section div.left-column {
+	width: 33%;
 	float: left;
 }
 
-section p, form {
-	float: right;
-	width: 66%;	
-	font-size: 14px;
-	letter-spacing:120%;
-	margin-bottom: 1.5em;
+section h3 {
+	float: left;
+	width: 33%;
+}
+
+section div.left-column h3 {
+	width: 100%;
+	margin-bottom: 0px;
+}
+
+section div.left-column img {
+	float: left;
+	width: 50%;
 }
 
 section h4 {
@@ -717,6 +725,21 @@ section h4 {
 	letter-spacing: 120%;
 	margin-bottom: 1.5em;
 	color: #333;
+}
+
+section label {
+	float: right;
+	width: 66%;
+	position: relative;
+	top: -1.3em;
+}
+
+section p, form {
+	float: right;
+	width: 66%;	
+	font-size: 14px;
+	letter-spacing:120%;
+	margin-bottom: 1.5em;
 }
 
 #open_call_video {

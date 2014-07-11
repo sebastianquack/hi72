@@ -1,0 +1,97 @@
+<%= render 'navigation' %>
+
+<div id="generator">
+		<%= render :partial => 'posters/generator' %>	
+</div>
+
+<div id="gallery">
+  
+<div class="nav-bg">
+	<div class="slide">
+		<a href="#" class="prev"><</a>
+		<a href="#" class="next">></a>
+		<div class="sharing-menu">
+            <span>Share This Poster!</span>
+            <a href="#" id="share-link">Link</a>
+            <a href="#" id="share-twitter">Twitter</a>
+            <a href="#" id="share-facebook">Facebook</a>
+        </div>
+	</div>
+</div>
+
+  <%= render :partial => 'posters/gallery' %>	
+
+	<div class="credits-container">
+		<div class="credits left">
+			<%= t :subtitle_left_html %>
+		</div>
+		<div class="credits right">
+			<%= t :subtitle_right_html %>
+		</div>
+	</div>
+</div>
+
+<div id="content">
+
+	<section id="about">
+
+<h3>A World Championship</h3>
+
+<p>This July, sixty architects, game designers, craftspeople, tinkerers and city planners will form five international teams and compete in a special World Championship. Some team members are from the Ruhr region, some are from the farthest corners of the world.</p>
+
+<p>International teams will challenge themselves in only 72 hours – three days and nights – to respond to a mission at a local site. Each team will design and build a temporary structure that invites people to come together in play, transforming the city life of Witten.</p>
+
+<p>Each team will be exploring their own variation of “gameful architecture”. How can a built environmental structure encourage people to meet and interact ? How can it encourage different play styles and possible games? Should it offer stages or maybe hiding places? Let us feel safe or free? Together or alone? Ecstatic or thoughtful? Let’s see what happens when citizens become more than simple users and indulge in play, in public, with each other and the fabric of the city itself.</p>
+
+<p>The stakes are high. The fight against Global Boredom is on.</p>
+
+<p>The teams of 72 Hour Interactions 2014 are: Better Wetter, Hagen Bilder, Hattingen Dragon Slayers, Herdecke Sawhorses, Witten Truffle Pigs.</p>
+
+<p>The Jury: Nathalie Pozzi (Architect), Eric Zimmerman (Game Designer), Philipp Misselwitz  (Urban Planner), Katja Aßmann (Artistic Director Urban Arts Ruhr) and representatives Municipality of Witten, to be confirmed).</p>
+      
+	</section>
+
+	<section id="suggest">
+
+			<h3><%= t :section_site_headline %></h3>
+			
+			<%= t :section_site_content1_html %>
+			
+            <!--
+            <%= form_for(@site, :html => {:class => "border-bottom"}, :remote=>true, 'data-type' => 'json') do |f| %>
+
+				<label for="site_description"><%= t :section_site_label_place %></label>
+                <%= f.text_area :description, required: "required" %>
+
+				<label for="site_reason"><%= t :section_site_label_why %></label>
+                <%= f.text_area :reason, required: "required" %>
+
+				<label for="site_name"><%= t :section_site_label_name %></label>
+                <%= f.text_field :name, required: "required" %>
+                
+				<label for="site_email"><%= t :section_site_label_email %></label>
+                <%= f.text_field :email, type: "email", required: "required" %>
+
+				<%= f.submit t(:form_submit) %>
+                
+                <label><%= t :section_site_notice_email_html %></label>
+            <% end %>
+            -->
+            			
+			<%= t :section_site_content2_html %>
+			
+	</section>	
+	
+	<section id="partners">
+			<h3><%= t :section_partners_headline %></h3>
+			<%= render 'welcome/partners' %>
+	</section>
+
+	<section id="contact">
+			<h3><%= t :section_contact_headline %></h3>
+			<%= t :section_contact_content_html %>
+	</section>
+
+	
+	<div style="clear:both"></div>
+</div>
