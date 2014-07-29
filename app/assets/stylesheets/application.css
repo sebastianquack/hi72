@@ -295,13 +295,17 @@ a.active {
 	box-shadow: 0px 5px 200px #000;
 }
 
-#front-cover img.center, #front-cover iframe.center {
+#front-cover img.center, #front-cover iframe.center, #front-cover div.center {
 	display:block;
 	margin: 0 auto;
 	z-index: 5;
 	position: relative;
 	width: 650px;
 	margin-top: 70px;
+}
+
+#front-cover div.center {
+	background-color: #000;
 }
 
 .logo-text {
